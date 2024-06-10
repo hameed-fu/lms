@@ -81,13 +81,15 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
+                                        <th>Address</th>
+                                        <th>E-mail</th>
+                                        
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Ali</td>
                                         <td>ali@gmail.com</td>
+                                        <td>Response</td>
                                         <td>
                                             <a class="btn btn-warning text-white">Edit</a>
                                             <a class="btn btn-danger text-white">Delete</a>
@@ -95,8 +97,9 @@
                                     </tr>
                                     <tr>
                                         <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
+                                        <td>password</td>
+                                        <td>CNIC</td>
+                                        <td>location</td>
                                         <td>
                                             <a class="btn btn-warning text-white">Edit</a>
                                             <a class="btn btn-danger text-white">Delete</a>
