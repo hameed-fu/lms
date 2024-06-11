@@ -3,6 +3,18 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php 
+include('parts/connection.php');
+
+// select data from categories table
+$sql = "SELECT * FROM comments";
+
+// runt the above query
+$result = $conn->query($sql);
+
+?>
+
 <body>
 
     <!--*******************
@@ -73,33 +85,39 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Comments Seassion</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Comments</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"></h4>
+                                <h4 class="card-title">Comments</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th colspan="4">Comments are allow in Student and Instructor</th>
-                                        
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Student Comment are Here</td>
-                                        <td>Realated to topic </td>
-                                        <td>
+                                    <?php while($row = $result->fetch_assoc()){ ?>
+
+                                        <tr>
+                                            <td><?php echo  $row['comment_id'] ?></td>
+                                            <td><?php echo $row['user_id'] ?></td>
+                                            <td><?php echo $row['lecturer_id'] ?></td>
+                                            <td><?php echo $row['comments'] ?></td>
+                                            <td><?php echo $row['feedback'] ?></td>
                                             
-                                            <a class="btn btn-danger text-white">ADD Comment</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Instructor Replay</td>
-                                        <td>Realated to Comment</td>
-                                        <td>
-                                           
-                                            <a class="btn btn-danger text-white">Delete Comment</a>
-                                        </td>
-                                    </tr>
+                                            
+
+
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
+                                    
                                  </table>
                             </div>
                         </div>

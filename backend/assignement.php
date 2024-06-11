@@ -73,36 +73,36 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Assignements</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
+                                <h4 class="card-title">Assignements</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
-                                        
+                                        <th>1</th>
+                                        <th>Subject name</th>
+                                        <th>Assignements Id</th>
+                                        <th> Assignement Topic</th>
                                     </tr>
                                     <tr>
                                         <td>1</td>
-                                        <td>Ali</td>
+                                        <td>web desiging</td>
                                         <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
+                                        <td>computer intro</td>
+                                        
                                         <td>
                                             <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
+                                            <a class="btn btn-danger text-white">Submitt</a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
+                                        <td>2</td>
+                                        <td>Graphic desiging</td>
+                                        <td>Hamid@gmail.com</td>
+                                        <td>introduction</td>
                                         <td>
                                             <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
+                                            <a class="btn btn-danger text-white">Submit</a>
                                         </td>
                                     </tr>
                                  </table>

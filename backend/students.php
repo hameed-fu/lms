@@ -3,6 +3,18 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php 
+include('parts/connection.php');
+
+// select data from categories table
+$sql = "SELECT * FROM students";
+
+// runt the above query
+$result = $conn->query($sql);
+
+?>
+
 <body>
 
     <!--*******************
@@ -73,38 +85,41 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">students</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
+                                <h4 class="card-title">students</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
-                                        
+                                        <th>Description</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
+                                    <?php while($row = $result->fetch_assoc()){ ?>
+
+                                        <tr>
+                                            <td><?php echo  $row['student_id'] ?></td>
+                                            <td><?php echo $row['first_name'] ?></td>
+                                            <td><?php echo $row['lasst_name'] ?></td>
+                                               <td><?php echo $row['email'] ?></td>
+                                            <td><?php echo $row['password'] ?></td>
+                                            <td><?php echo $row['phone'] ?></td>
+                                            <td><?php echo $row['address'] ?></td>
+                                            
+                                            
+
+
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
+                                    
                                  </table>
                             </div>
                         </div>
@@ -138,4 +153,4 @@
 
 </body>
 
-</html>t
+</html>

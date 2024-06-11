@@ -3,6 +3,18 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php 
+include('parts/connection.php');
+
+// select data from categories table
+$sql = "SELECT * FROM lectures";
+
+// runt the above query
+$result = $conn->query($sql);
+
+?>
+
 <body>
 
     <!--*******************
@@ -73,38 +85,43 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">lectures</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
+                                <h4 class="card-title">lectures</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
-                                        
+                                        <th>Description</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
+                                    <?php while($row = $result->fetch_assoc()){ ?>
+
+                                        <tr>
+                                            <td><?php echo  $row['lecture_id'] ?></td>
+                                            <td><?php echo $row['instructor_name'] ?></td>
+                                            <td><?php echo $row['subject_description'] ?></td>
+                                            <td><?php echo $row['description'] ?></td>
+                                            <td><?php echo $row['title'] ?></td>
+                                            <td><?php echo $row['content_URL'] ?></td>
+                                            <td><?php echo $row['creation_date'] ?></td>
+                                            <td><?php echo $row['last_updated'] ?></td>
+
+                                            
+                                            
+
+
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
+                                    
                                  </table>
                             </div>
                         </div>
@@ -138,4 +155,4 @@
 
 </body>
 
-</html>t
+</html>

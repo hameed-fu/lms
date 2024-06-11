@@ -73,10 +73,10 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Users</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
+                                <h4 class="card-title">Users</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
@@ -89,7 +89,7 @@
                                         <td>1</td>
                                         <td>Ali</td>
                                         <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
+                                        <td>Response</td>
                                         <td>
                                             <a class="btn btn-warning text-white">Edit</a>
                                             <a class="btn btn-danger text-white">Delete</a>
@@ -138,4 +138,4 @@
 
 </body>
 
-</html>t
+</html>

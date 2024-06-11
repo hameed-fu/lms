@@ -3,6 +3,18 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php 
+include('parts/connection.php');
+
+// select data from categories table
+$sql = "SELECT * FROM categories";
+
+// runt the above query
+$result = $conn->query($sql);
+
+?>
+
 <body>
 
     <!--*******************
@@ -73,37 +85,33 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Categorey</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Categories</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Find Categorey</h4>
+                                <h4 class="card-title">Categories</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
-                                        <th>course categorey</th>
-                                        <th>Instructor categorey</th>
-                                        <th>stuent Categorey</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>dhfkg</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>dgfegywe</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
+                                    <?php while($row = $result->fetch_assoc()){ ?>
+
+                                        <tr>
+                                            <td><?php echo  $row['category_id'] ?></td>
+                                            <td><?php echo $row['category_name'] ?></td>
+                                            <td><?php echo $row['description'] ?></td>
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
+                                    
                                  </table>
                             </div>
                         </div>

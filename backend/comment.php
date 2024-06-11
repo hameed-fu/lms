@@ -8,13 +8,7 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
+   
     <!--*******************
         Preloader end
     ********************-->
@@ -73,36 +67,31 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Comments Seassion</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
+                                <h4 class="card-title"></h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
+                                        <th colspan="4">Comments are allow in Student and Instructor</th>
                                         
                                     </tr>
                                     <tr>
                                         <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
+                                        <td>Student Comment are Here</td>
+                                        <td>Realated to topic </td>
                                         <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
+                                            
+                                            <a class="btn btn-danger text-white">ADD Comment</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
+                                        <td>Instructor Replay</td>
+                                        <td>Realated to Comment</td>
                                         <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
+                                           
+                                            <a class="btn btn-danger text-white">Delete Comment</a>
                                         </td>
                                     </tr>
                                  </table>
@@ -138,4 +127,4 @@
 
 </body>
 
-</html>t
+</html>

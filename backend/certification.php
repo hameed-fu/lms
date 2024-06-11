@@ -28,17 +28,7 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
-                    <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
+       
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -73,10 +63,10 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">student certificate</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
+                                <h4 class="card-title">certificate</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
@@ -89,7 +79,7 @@
                                         <td>1</td>
                                         <td>Ali</td>
                                         <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
+                                        <td>Response</td>
                                         <td>
                                             <a class="btn btn-warning text-white">Edit</a>
                                             <a class="btn btn-danger text-white">Delete</a>
@@ -138,4 +128,4 @@
 
 </body>
 
-</html>t
+</html>

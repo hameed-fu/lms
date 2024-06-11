@@ -3,6 +3,18 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php 
+include('parts/connection.php');
+
+// select data from categories table
+$sql = "SELECT * FROM certifications";
+
+// runt the above query
+$result = $conn->query($sql);
+
+?>
+
 <body>
 
     <!--*******************
@@ -15,7 +27,6 @@
             </svg>
         </div>
     </div>
-    Hello
     <!--*******************
         Preloader end
     ********************-->
@@ -74,38 +85,39 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">student certificate</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">certificates</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">certificate</h4>
+                                <h4 class="card-title">certificates</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
-                                        
+                                        <th>Description</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Response</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
+                                    <?php while($row = $result->fetch_assoc()){ ?>
+
+                                        <tr>
+                                            <td><?php echo  $row['certificate_id'] ?></td>
+                                            <td><?php echo $row['course_id'] ?></td>
+                                            <td><?php echo $row['student_id'] ?></td>
+                                            <td><?php echo $row['from_date'] ?></td>
+                                            <td><?php echo $row['to_date'] ?></td>
+                                            
+                                            
+
+
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
+                                    
                                  </table>
                             </div>
                         </div>
