@@ -3,6 +3,24 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php
+include ('parts/connection.php');
+
+if(isset($_POST['save'])){
+    $category_name = $_POST['category_name'];
+    $category_description = $_POST['category_description'];
+    
+    $sql = "INSERT INTO categories(category_name, description) values('$category_name', '$category_description')";
+    $state = $conn->query($sql);
+    if($state){
+        //echo "record added successfully";
+        header("Location: categorey.php");
+    }
+}
+
+?>
+
 <body>
 
     <!--*******************
@@ -73,39 +91,23 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Students</h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Responsfdsafase</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                 </table>
+                                <h4 class="card-title">Add New Category</h4>
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" name="category_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Description</label>
+                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -128,7 +130,7 @@
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************
@@ -138,4 +140,4 @@
 
 </body>
 
-</html>t
+</html>

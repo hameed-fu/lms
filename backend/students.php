@@ -92,8 +92,11 @@ $result = $conn->query($sql);
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
                                         <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
@@ -101,9 +104,9 @@ $result = $conn->query($sql);
                                         <tr>
                                             <td><?php echo  $row['student_id'] ?></td>
                                             <td><?php echo $row['first_name'] ?></td>
-                                            <td><?php echo $row['lasst_name'] ?></td>
+                                            <td><?php echo $row['last_name'] ?></td>
                                                <td><?php echo $row['email'] ?></td>
-                                            <td><?php echo $row['password'] ?></td>
+                                             
                                             <td><?php echo $row['phone'] ?></td>
                                             <td><?php echo $row['address'] ?></td>
                                             
