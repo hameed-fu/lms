@@ -99,13 +99,13 @@ $result = $conn->query($sql);
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
                                         <tr>
-                                            <td><?php echo  $row['user_id'] ?></td>
+                                            <td><?php echo  $row['instructor_id'] ?></td>
                                             <td><?php echo $row['first_name'] ?></td>
                                             <td><?php echo $row['last_name'] ?></td>
                                             <td><?php echo $row['email'] ?></td>
                                             <td><?php echo $row['password'] ?></td>
                                             <td><?php echo $row['phone'] ?></td>
-                                            <td><?php echo $row['instructor_id'] ?></td>
+                                         
                                             
 
 

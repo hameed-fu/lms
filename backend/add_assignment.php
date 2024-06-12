@@ -17,7 +17,7 @@ if(isset($_POST['save'])){
     
 
     
-    $sql = "INSERT INTO courses(course_name, course_description,number_of_students,category_id,start_date,end_date) values('$cource_name','$course_description','$number_of_students',' $category_id','$category_id','$start_date','$end_date')";
+    $sql = "INSERT INTO assingments(course_name, course_description,number_of_students,category_id,start_date,end_date) values('$course_name','$course_description','$number_of_students',' $category_id','$start_date','$end_date')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -100,36 +100,37 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"></h4>
+                                <h4 class="card-title">Add New Assignment</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">cource name</label>
-                                        <input type="text" class="form-control" id="name" name="cource_name">
+                                        <input type="text" class="form-control" id="name" name="course_name">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">number_of_students</label>
-                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                        <label for="exampleInputPassword1">Number Of students</label>
+                                        <textarea name="number_of_students" class="form-control"  id=""></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name"> start date</label>
-                                        <input type="text" class="form-control" id="name" name="start_date">
-                                         
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">category_id</label>
                                         <textarea name="category_id" class="form-control"  id=""></textarea>
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="name"> start date</label>
+                                        <input type="date" class="form-control" id="name" name="start_date">
+                                         
+                                    </div>
+                                    <div class="form-group">
                                         <label for="exampleInputPassword1">end date</label>
-                                        <textarea name="end_date" class="form-control"  id=""></textarea>
+                                        <input type="date" name="end_date" class="form-control"  id="">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">course_description</label>
-                                        <textarea name="end_date" class="form-control"  id=""></textarea>
+                                        <textarea name="course_description" class="form-control"  id=""></textarea>
                                     </div>
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

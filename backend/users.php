@@ -73,7 +73,7 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Users</a>
+                        <a href="add_user.php" class="btn btn-primary mb-1">Add New User</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Users</h4>

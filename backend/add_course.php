@@ -3,6 +3,30 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php
+include ('parts/connection.php');
+
+if(isset($_POST['save'])){
+    $course_name = $_POST['course_name'];
+    $course_description = $_POST['course_description'];
+    $number_of_students = $_POST['number_of_students'];
+    $category_id = $_POST['category_id'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    
+
+    
+    $sql = "INSERT INTO courses(course_name, course_description,number_of_students,category_id,start_date,end_date) values('$course_name','$course_description','$number_of_students',' $category_id','$start_date','$end_date')";
+    $state = $conn->query($sql);
+    if($state){
+        //echo "record added successfully";
+        header("Location: courses.php");
+    }
+}
+
+?>
+
 <body>
 
     <!--*******************
@@ -73,39 +97,44 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Users</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Users</h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Response</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
-                                 </table>
+                                <h4 class="card-title">Add New Course</h4>
+                            
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">cource name</label>
+                                        <input type="text" class="form-control" id="name" name="course_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Number Of students</label>
+                                        <textarea name="number_of_students" class="form-control"  id=""></textarea>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">category_id</label>
+                                        <textarea name="category_id" class="form-control"  id=""></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name"> start date</label>
+                                        <input type="date" class="form-control" id="name" name="start_date">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">end date</label>
+                                        <input type="date" name="end_date" class="form-control"  id="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">course_description</label>
+                                        <textarea name="course_description" class="form-control"  id=""></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -128,7 +157,7 @@
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************

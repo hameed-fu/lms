@@ -85,7 +85,6 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Comments</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Comments</h4>

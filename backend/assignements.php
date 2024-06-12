@@ -73,7 +73,7 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Assignements</a>
+                        <a href="add_assignment.php" class="btn btn-primary mb-1">Add New Assignements</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Assignements</h4>

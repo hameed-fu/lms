@@ -40,17 +40,7 @@ $result = $conn->query($sql);
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
-                    <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
+        
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -85,7 +75,7 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_cources.php" class="btn btn-primary mb-1"> add new Courses</a>
+                        <a href="add_course.php" class="btn btn-primary mb-1"> Add New Course</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Categories</h4>

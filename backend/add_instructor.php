@@ -14,7 +14,7 @@ if(isset($_POST['save'])){
     $password = $_POST['password'];
     $phone = $_POST['phone'];
     
-    $sql = "INSERT INTO firstname(first_name,last_name,email,password,phone) values('$first_name', '$last_name','$email','$password','$phone')";
+    $sql = "INSERT INTO instructors(first_name,last_name,email,password,phone) values('$first_name', '$last_name','$email','$password','$phone')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -120,8 +120,8 @@ if(isset($_POST['save'])){
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">phone</label>
-                                        <input type="text" class="form-control" id="name" name="password">
+                                        <label for="name">Phone Number</label>
+                                        <input type="text" class="form-control" id="phone" name="phone">
                                          
                                     </div>
                                    

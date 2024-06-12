@@ -3,12 +3,36 @@
 
 <?php include ('parts/head.php') ?>
 
+
+<?php
+include ('parts/connection.php');
+
+if(isset($_POST['save'])){
+    $category_name = $_POST['category_name'];
+    $category_description = $_POST['category_description'];
+    
+    $sql = "INSERT INTO assignments(category_name, description) values('$category_name', '$category_description')";
+    $state = $conn->query($sql);
+    if($state){
+        //echo "record added successfully";
+        header("Location: categorey.php");
+    }
+}
+
+?>
+
 <body>
 
     <!--*******************
         Preloader start
     ********************-->
-   
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
     <!--*******************
         Preloader end
     ********************-->
@@ -67,34 +91,24 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">Comments Seassion</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"></h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th colspan="4">Comments are allow in Student and Instructor</th>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Student Comment are Here</td>
-                                        <td>Realated to topic </td>
-                                        <td>
-                                            
-                                            <a class="btn btn-danger text-white">ADD Comment</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Instructor Replay</td>
-                                        <td>Realated to Comment</td>
-                                        <td>
-                                           
-                                            <a class="btn btn-danger text-white">Delete Comment</a>
-                                        </td>
-                                    </tr>
-                                 </table>
+                                <h4 class="card-title">Add Notification</h4>
+                            
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" name="category_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Description</label>
+                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -117,7 +131,7 @@
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************

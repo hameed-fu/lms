@@ -85,10 +85,9 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">certificates</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">certificates</h4>
+                                <h4 class="card-title">Certificates</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
