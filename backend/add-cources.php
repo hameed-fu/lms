@@ -4,14 +4,26 @@
 <?php include ('parts/head.php') ?>
 
 
-<?php 
-include('parts/connection.php');
+<?php
+include ('parts/connection.php');
 
-// select data from categories table
-$sql = "SELECT * FROM courses";
+if(isset($_POST['save'])){
+    $course_name = $_POST['course_name'];
+    $course_description = $_POST['course_description'];
+    $number_of_students = $_POST['number_of_students'];
+    $category_id = $_POST['category_id'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    
 
-// runt the above query
-$result = $conn->query($sql);
+    
+    $sql = "INSERT INTO courses(course_name, course_description,number_of_students,category_id,start_date,end_date) values('$cource_name','$course_description','$number_of_students',' $category_id','$category_id','$start_date','$end_date')";
+    $state = $conn->query($sql);
+    if($state){
+        //echo "record added successfully";
+        header("Location: courses.php");
+    }
+}
 
 ?>
 
@@ -85,41 +97,43 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_cources.php" class="btn btn-primary mb-1"> add new Courses</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Categories</h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
+                                <h4 class="card-title"></h4>
+                            
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">cource name</label>
+                                        <input type="text" class="form-control" id="name" name="cource_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">number_of_students</label>
+                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name"> start date</label>
+                                        <input type="text" class="form-control" id="name" name="start_date">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">category_id</label>
+                                        <textarea name="category_id" class="form-control"  id=""></textarea>
+                                    </div>
 
-                                        <tr>
-                                            <td><?php echo  $row['course_id'] ?></td>
-                                            <td><?php echo $row['course_name'] ?></td>
-                                            <td><?php echo $row['course_description'] ?></td>
-                                            <td><?php echo $row['category_id'] ?></td>
-                                            <td><?php echo $row['number_of_students'] ?></td>
-                                            <td><?php echo $row['start_date'] ?></td>
-                                            <td><?php echo $row['end_date'] ?></td>
-                                            
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">end date</label>
+                                        <textarea name="end_date" class="form-control"  id=""></textarea>
+                                    </div>
 
-
-                                            <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
-                                        </tr>
-
-                                    <?php } ?>
-
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">course_description</label>
+                                        <textarea name="end_date" class="form-control"  id=""></textarea>
+                                    </div>
                                     
-                                 </table>
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -142,7 +156,7 @@ $result = $conn->query($sql);
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************

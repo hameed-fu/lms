@@ -14,8 +14,4 @@ if(!$conn){
 // else{
 //     echo "Connection created successfully";
 // }
-
-
- 
-
 ?>

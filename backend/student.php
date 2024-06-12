@@ -1,19 +1,7 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="en">
 
 <?php include ('parts/head.php') ?>
-
-
-<?php 
-include('parts/connection.php');
-
-// select data from categories table
-$sql = "SELECT * FROM courses";
-
-// runt the above query
-$result = $conn->query($sql);
-
-?>
 
 <body>
 
@@ -85,40 +73,38 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_cources.php" class="btn btn-primary mb-1"> add new Courses</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add New Student</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Categories</h4>
+                                <h4 class="card-title">Students</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
+                                        <th>Address</th>
+                                        <th>E-mail</th>
+                                        
                                     </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
-
-                                        <tr>
-                                            <td><?php echo  $row['course_id'] ?></td>
-                                            <td><?php echo $row['course_name'] ?></td>
-                                            <td><?php echo $row['course_description'] ?></td>
-                                            <td><?php echo $row['category_id'] ?></td>
-                                            <td><?php echo $row['number_of_students'] ?></td>
-                                            <td><?php echo $row['start_date'] ?></td>
-                                            <td><?php echo $row['end_date'] ?></td>
-                                            
-
-
-                                            <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
-                                        </tr>
-
-                                    <?php } ?>
-
-                                    
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Ali</td>
+                                        <td>ali@gmail.com</td>
+                                        <td>Response</td>
+                                        <td>
+                                            <a class="btn btn-warning text-white">Edit</a>
+                                            <a class="btn btn-danger text-white">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>password</td>
+                                        <td>CNIC</td>
+                                        <td>location</td>
+                                        <td>
+                                            <a class="btn btn-warning text-white">Edit</a>
+                                            <a class="btn btn-danger text-white">Delete</a>
+                                        </td>
+                                    </tr>
                                  </table>
                             </div>
                         </div>
@@ -152,4 +138,4 @@ $result = $conn->query($sql);
 
 </body>
 
-</html>
+</html>t

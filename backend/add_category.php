@@ -95,6 +95,7 @@ if(isset($_POST['save'])){
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Add New Category</h4>
+                            
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">Name</label>
