@@ -13,7 +13,7 @@
                     <li><a href="enrollments.php">Enrollment</a></li>
                     <li><a href="users.php">Users</a></li>
                     <li><a href="notifications.php">Notification</a></li>
-                    <li><a href="subject.php">Subjects</a></li>
+                    <li><a href="subjects.php">Subjects</a></li>
                     <li><a href="categorey.php">Categorey</a></li>
                     <li><a href="certifications.php">Certificates</a></li>
                     <li><a href="lectures.php">Lectures</a></li>

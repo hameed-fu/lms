@@ -13,12 +13,12 @@ if(isset($_POST['save'])){
     $subject_id = $_POST['subject_id'];
     $description = $_POST['description'];
     $content_URL = $_POST['content_URL'];
-    $creation_date = $_POST['creation_date'];
+    $creation_date = date('Y-m-d H:i:s');
     
     
 
     
-    $sql = "INSERT INTO add_lectures(instructor_id,tittle,subject_id,description,content_URL,creation_date) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date')";
+    $sql = "INSERT INTO lectures(instructor_id,tittle,subject_id,description,content_URL,creation_date) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";

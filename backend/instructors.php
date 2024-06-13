@@ -85,19 +85,18 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">instructors</a>
+                        <a href="add_instructor.php" class="btn btn-primary mb-1">Add new instructor</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">instructors</h4>
+                                <h4 class="card-title">Instructors</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>1</th>
-                                        <th>instructors Id</th>
+                                        <th>ID</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Email</th>
-                                        <th>Password</th>
                                         <th>Phone</th>
+                                        <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
@@ -106,7 +105,6 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['first_name'] ?></td>
                                             <td><?php echo $row['last_name'] ?></td>
                                             <td><?php echo $row['email'] ?></td>
-                                            <td><?php echo $row['password'] ?></td>
                                             <td><?php echo $row['phone'] ?></td>
                                          
                                             

@@ -102,13 +102,36 @@ if(isset($_POST['save'])){
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="category_name">
+                                        <label for="name">Title</label>
+                                        <input type="text" class="form-control" id="name" name="title">
                                          
                                     </div>
                                     <div class="form-group">
+                                        <label for="name">Code</label>
+                                        <input type="text" class="form-control" id="name" name="code">
+                                         
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Course</label>
+                                        <?php 
+                                            $sql = "SELECT * FROM courses";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="course_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                         
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                        <textarea name="description" class="form-control"  id=""></textarea>
                                     </div>
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
