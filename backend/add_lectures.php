@@ -8,14 +8,21 @@
 include ('parts/connection.php');
 
 if(isset($_POST['save'])){
-    $category_name = $_POST['category_name'];
-    $category_description = $_POST['category_description'];
+    $instructor_id = $_POST['instructor_id'];
+    $tittle = $_POST['tittle'];
+    $subject_id = $_POST['subject_id'];
+    $description = $_POST['description'];
+    $content_URL = $_POST['content_URL'];
+    $creation_date = $_POST['creation_date'];
     
-    $sql = "INSERT INTO assignments(category_name, description) values('$category_name', '$category_description')";
+    
+
+    
+    $sql = "INSERT INTO add_lectures(instructor_id,tittle,subject_id,description,content_URL,creation_date) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: categorey.php");
+        header("Location: courses.php");
     }
 }
 
@@ -94,18 +101,49 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add New User</h4>
+                                <h4 class="card-title"></h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="category_name">
+                                        <label for="name">Instructor id</label>
+                                        <input type="text" class="form-control" id="name" name="instructor_id">
+                                         
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="name">Tittle</label>
+                                        <input type="text" class="form-control" id="name" name="tittle">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Subject id</label>
+                                        <input type="text" class="form-control" id="name" name="subject_id">
                                          
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                        <textarea name="description" class="form-control"  id=""></textarea>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="name"> Content URL</label>
+                                        <input type="text" class="form-control" id="name" name="content_URL">
+                                         
+                                    </div>
+                    
+                                   
+                                    
+
+                                    <div class="form-group">
+                                        <label for="name">Creation date</label>
+                                        <input type="date" class="form-control" id="name" name="cration_date">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Last updated</label>
+                                        <input type="date" class="form-control" id="name" name="last_updated">
+                                         
+                                    </div>
+                    
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>

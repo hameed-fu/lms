@@ -85,16 +85,20 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">lectures</a>
+                        <a href="add_lectures.php" class="btn btn-primary mb-1">lectures</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">lectures</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
+                                        <th>1</th>
+                                        <th>Instructor id</th>
+                                        <th>Tittle</th>
+                                        <th>Subject id</th>
                                         <th>Description</th>
-                                        <th>Action</th>
+                                        <th>Content URL</th>
+                                        <th>Creation date</th>
+                                        <th>Last updated</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 

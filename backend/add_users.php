@@ -4,14 +4,27 @@
 <?php include ('parts/head.php') ?>
 
 
-<?php 
-include('parts/connection.php');
+<?php
+include ('parts/connection.php');
 
-// select data from categories table
-$sql = "SELECT * FROM instructors";
+if(isset($_POST['save'])){
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $last_login = $_POST['last_login'];
+   
+    
+    
 
-// runt the above query
-$result = $conn->query($sql);
+    
+    $sql = "INSERT INTO add_users(first_name,last_name,email,password,last_login) values(' $first_name',' $last_name',' $email','  $password','$last_login')";
+    $state = $conn->query($sql);
+    if($state){
+        //echo "record added successfully";
+        header("Location: courses.php");
+    }
+}
 
 ?>
 
@@ -85,44 +98,48 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">instructors</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">instructors</h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th>1</th>
-                                        <th>instructors Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Password</th>
-                                        <th>Phone</th>
-                                    </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
-
-                                        <tr>
-                                            <td><?php echo  $row['instructor_id'] ?></td>
-                                            <td><?php echo $row['first_name'] ?></td>
-                                            <td><?php echo $row['last_name'] ?></td>
-                                            <td><?php echo $row['email'] ?></td>
-                                            <td><?php echo $row['password'] ?></td>
-                                            <td><?php echo $row['phone'] ?></td>
+                                <h4 class="card-title"></h4>
+                            
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">First Name</label>
+                                        <input type="text" class="form-control" id="name" name="first_name">
                                          
-                                            
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="name">Last Name</label>
+                                        <input type="text" class="form-control" id="name" name="last_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Email</label>
+                                        <input type="text" class="form-control" id="name" name="email">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input type="text" class="form-control" id="name" name="password">
+                                         
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                        <label for="name"> Last Login</label>
+                                        <input type="date" class="form-control" id="name" name="last_login">
+                                         
+                                    </div>
+                    
+                                
+                                
 
-
-                                            <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
-                                        </tr>
-
-                                    <?php } ?>
-
+        
+                    
                                     
-                                 </table>
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -145,7 +162,7 @@ $result = $conn->query($sql);
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************

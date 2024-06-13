@@ -73,39 +73,30 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_user.php" class="btn btn-primary mb-1">Add New User</a>
+                        <a href="add_users.php" class="btn btn-primary mb-1">Add New User</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Users</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>E-mail</th>
+                                        <th>1</th>
+                                        <th>User id</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                        <th>Last login</th>
                                         
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ali</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>Response</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
+                                    
+                                        
+                                           
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>password</td>
-                                        <td>CNIC</td>
-                                        <td>location</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Delete</a>
-                                        </td>
-                                    </tr>
+                                   
                                  </table>
+                                 <a class="btn btn-warning text-white">Edit</a>
+                                    <a class="btn btn-danger text-white">Delete</a>
                             </div>
                         </div>
                     </div>

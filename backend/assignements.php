@@ -78,34 +78,28 @@
                             <div class="card-body">
                                 <h4 class="card-title">Assignements</h4>
                                  <table class="table table-hover table-striped">
-                                    <tr>
+                                 <tr>
                                         <th>1</th>
-                                        <th>Subject name</th>
-                                        <th>Assignements Id</th>
-                                        <th> Assignement Topic</th>
+                                        <th>Assignment id</th>
+                                        <th>Instructor id</th>
+                                        <th>Lecture id</th>
+                                        <th>Tittle</th>
+                                        <th>Description</th>
+                                        <th>Due Date</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>web desiging</td>
-                                        <td>ali@gmail.com</td>
-                                        <td>computer intro</td>
+                                   
                                         
-                                        <td>
+                                       
+                                    </tr>
+                                   
+                                 </table>
+                                 <td>
                                             <a class="btn btn-warning text-white">Edit</a>
                                             <a class="btn btn-danger text-white">Submitt</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Graphic desiging</td>
-                                        <td>Hamid@gmail.com</td>
-                                        <td>introduction</td>
-                                        <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Submit</a>
-                                        </td>
-                                    </tr>
-                                 </table>
+                                   
+                                
                             </div>
                         </div>
                     </div>

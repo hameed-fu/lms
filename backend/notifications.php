@@ -91,9 +91,12 @@ $result = $conn->query($sql);
                                 <h4 class="card-title">notifications</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
+                                        <th>1</th>
+                                        <th>User Id</th>
+                                        <th>Course Id</th>
+                                        <th>Message</th>
+                                        <th>Date Created</th>
+                                        <th>Is Read</th>
                                         <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
@@ -120,6 +123,11 @@ $result = $conn->query($sql);
 
                                     
                                  </table>
+                                 <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
                             </div>
                         </div>
                     </div>

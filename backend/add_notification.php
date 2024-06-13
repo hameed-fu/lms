@@ -8,14 +8,18 @@
 include ('parts/connection.php');
 
 if(isset($_POST['save'])){
-    $category_name = $_POST['category_name'];
-    $category_description = $_POST['category_description'];
+    $user_id = $_POST['user_id'];
+    $course_id = $_POST['course_id'];
+    $message = $_POST['message'];
+    $date_created = $_POST['date_created'];
+    $is_read= $_POST['is_read'];
+   
     
-    $sql = "INSERT INTO assignments(category_name, description) values('$category_name', '$category_description')";
+    $sql = "INSERT INTO notifications(user_id,course_id,message,date_created,is_read) values('$user_id', '$course_id','$message','date_created','$is_read')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: categorey.php");
+        header("Location: notifications.php");
     }
 }
 
@@ -94,18 +98,35 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add Notification</h4>
+                                <h4 class="card-title"></h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="category_name">
+                                        <label for="name">User Id</label>
+                                        <input type="text" class="form-control" id="name" name="user_id">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                        <label for="name">Course Id</label>
+                                        <input type="text" class="form-control" id="name" name="course_id">
+                                         
                                     </div>
+                                    <div class="form-group">
+                                        <label for="name">Message</label>
+                                        <input type="text" class="form-control" id="name" name="message">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Date Created</label>
+                                        <input type="date" class="form-control" id="name" name="date_crated">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Is read</label>
+                                        <input type="text" class="form-control" id="name" name="is_read">
+                                         
+                                    </div>
+                                   
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>

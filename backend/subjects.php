@@ -3,18 +3,6 @@
 
 <?php include ('parts/head.php') ?>
 
-
-<?php 
-include('parts/connection.php');
-
-// select data from categories table
-$sql = "SELECT * FROM instructors";
-
-// runt the above query
-$result = $conn->query($sql);
-
-?>
-
 <body>
 
     <!--*******************
@@ -85,43 +73,40 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">instructors</a>
+                        <a href="add_subject.php" class="btn btn-primary mb-1">Add New subject</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">instructors</h4>
+                                <h4 class="card-title">Subjects</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>1</th>
-                                        <th>instructors Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Password</th>
-                                        <th>Phone</th>
+                                        <th>#</th>
+                                        <th>Title</th>
+                                        <th>Code</th>
+                                        <th>Description</th>
+                                        <th>Course id</th>
+                                        
+                                        
                                     </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
-
-                                        <tr>
-                                            <td><?php echo  $row['instructor_id'] ?></td>
-                                            <td><?php echo $row['first_name'] ?></td>
-                                            <td><?php echo $row['last_name'] ?></td>
-                                            <td><?php echo $row['email'] ?></td>
-                                            <td><?php echo $row['password'] ?></td>
-                                            <td><?php echo $row['phone'] ?></td>
-                                         
-                                            
-
-
-                                            <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
-                                        </tr>
-
-                                    <?php } ?>
-
-                                    
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Ali</td>
+                                        <td>ali@gmail.com</td>
+                                        <td>Response</td>
+                                        <td>
+                                            <a class="btn btn-warning text-white">Edit</a>
+                                            <a class="btn btn-danger text-white">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>password</td>
+                                        <td>CNIC</td>
+                                        <td>location</td>
+                                        <td>
+                                            <a class="btn btn-warning text-white">Edit</a>
+                                            <a class="btn btn-danger text-white">Delete</a>
+                                        </td>
+                                    </tr>
                                  </table>
                             </div>
                         </div>

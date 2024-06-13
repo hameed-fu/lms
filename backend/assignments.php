@@ -91,10 +91,13 @@ $result = $conn->query($sql);
                                 <h4 class="card-title">assignments</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
+                                        <th>1</th>
+                                        <th>Assignment id</th>
+                                        <th>Instructor id</th>
+                                        <th>Lecture id</th>
+                                        <th>Tittle</th>
                                         <th>Description</th>
-                                        <th>Action</th>
+                                        <th>Due Date</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 

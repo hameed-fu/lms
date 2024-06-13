@@ -78,14 +78,19 @@ $result = $conn->query($sql);
                         <a href="add_course.php" class="btn btn-primary mb-1"> Add New Course</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Categories</h4>
+                                <h4 class="card-title">Course</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
+                                        <th>1</th>
+                                        <th>Cource Name</th>
+                                        <th>Number Of Students</th>
+                                        <th>Category id</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Course_Description</th>
                                     </tr>
+                                    <br>
+                                    <br>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
                                         <tr>
@@ -99,17 +104,18 @@ $result = $conn->query($sql);
                                             
 
 
-                                            <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
+                                        
                                         </tr>
 
                                     <?php } ?>
 
                                     
                                  </table>
+                                 <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
                             </div>
                         </div>
                     </div>

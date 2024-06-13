@@ -8,14 +8,18 @@
 include ('parts/connection.php');
 
 if(isset($_POST['save'])){
-    $category_name = $_POST['category_name'];
-    $category_description = $_POST['category_description'];
+    $title = $_POST['title'];
+    $code = $_POST['code'];
+    $descriptions = $_POST['description'];
+    $course_id = $_POST['course_id'];
+
+
     
-    $sql = "INSERT INTO assignments(category_name, description) values('$category_name', '$category_description')";
+    $sql = "INSERT INTO subjects(title, code,description,course_id) values('$title','$code', '$description','$course_id')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: categorey.php");
+        header("Location: subjects.php");
     }
 }
 
