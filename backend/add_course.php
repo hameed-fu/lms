@@ -100,31 +100,31 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add New Course</h4>
+                                <h4 class="card-title"></h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">cource name</label>
+                                        <label for="name">Cource Name</label>
                                         <input type="text" class="form-control" id="name" name="course_name">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Number Of students</label>
+                                        <label for="exampleInputPassword1">Number Of Students</label>
                                         <textarea name="number_of_students" class="form-control"  id=""></textarea>
                                     </div>
                                    
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">category_id</label>
+                                        <label for="exampleInputPassword1">Category_Id</label>
                                         <textarea name="category_id" class="form-control"  id=""></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="name"> start date</label>
+                                        <label for="name"> Start Date</label>
                                         <input type="date" class="form-control" id="name" name="start_date">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">end date</label>
+                                        <label for="exampleInputPassword1">End Date</label>
                                         <input type="date" name="end_date" class="form-control"  id="">
                                     </div>
 

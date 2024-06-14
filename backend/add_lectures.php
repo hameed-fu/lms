@@ -106,12 +106,25 @@ if(isset($_POST['save'])){
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">Instructor id</label>
-                                        <input type="text" class="form-control" id="name" name="instructor_id">
+                                        <?php 
+                                            $sql = "SELECT * FROM lectures";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="instructor_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                         
+                                    </div>
                                          
                                     </div>
                                    
                                     <div class="form-group">
-                                        <label for="name">Tittle</label>
+                                        <label for="name">Title</label>
                                         <input type="text" class="form-control" id="name" name="tittle">
                                          
                                     </div>

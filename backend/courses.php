@@ -15,6 +15,22 @@ $result = $conn->query($sql);
 
 ?>
 
+<?php 
+
+include('parts/connection.php');
+// select data from categories table
+$sql = "SELECT subjects.*, courses.course_name 
+from subjects
+join courses on subjects.course_id = courses.course_id
+";
+
+// runt the above query
+$result = $conn->query($sql);
+
+
+
+?>
+
 <body>
 
     <!--*******************
