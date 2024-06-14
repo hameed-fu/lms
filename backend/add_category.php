@@ -104,7 +104,7 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="category_description" class="form-control"  id=""></textarea>
+                                        <textarea name="category_description" class="form-control"  id="category_description"></textarea>
                                     </div>
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

@@ -85,16 +85,17 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">enrollments</a>
+                        <a href="" class="btn btn-primary mb-1">Enrollments</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">enrollments</h4>
+                                <h4 class="card-title"></h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
+                                        <th>1</th>
+                                        <th>Student Id</th>
+                                        <th>Course Id</th>
+                                        <th>Enrollment Date</th>
+                                         <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
@@ -103,10 +104,6 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['student_id'] ?></td>
                                             <td><?php echo $row['course_id'] ?></td>
                                             <td><?php echo $row['enrollment_date'] ?></td>
-                                            
-                                            
-
-
                                             <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
                                                 <a class="btn btn-danger text-white">Delete</a>

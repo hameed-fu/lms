@@ -95,6 +95,8 @@ $result = $conn->query($sql);
                                         <th>Category Id</th>
                                         <th>Category Name</th>
                                         <th>Description</th>
+                                        <th>Action</th>
+
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 

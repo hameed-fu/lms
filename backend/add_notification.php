@@ -122,7 +122,7 @@ if(isset($_POST['save'])){
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Is read</label>
+                                        <label for="name">Is Read</label>
                                         <input type="text" class="form-control" id="name" name="is_read">
                                          
                                     </div>

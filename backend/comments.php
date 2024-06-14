@@ -91,9 +91,11 @@ $result = $conn->query($sql);
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
+                                        <th>User Id</th>
+                                        <th>Lecture Id</th>
+                                        <th>Comments</th>
+                                        <th>Feedback</th>
+                                          <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 

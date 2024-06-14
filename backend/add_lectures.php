@@ -106,7 +106,7 @@ if(isset($_POST['save'])){
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Instructor</label>
+                                        <label for="name">Lectures</label>
                                         <?php 
 
                                             $sql = "SELECT * FROM instructors";

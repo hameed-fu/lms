@@ -88,10 +88,10 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_lectures.php" class="btn btn-primary mb-1">lectures</a>
+                        <a href="add_lectures.php" class="btn btn-primary mb-1">Add New lectures</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">lectures</h4>
+                                <h4 class="card-title"></h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>ID</th>
@@ -107,18 +107,13 @@ $result = $conn->query($sql);
 
                                         <tr>
                                             <td><?php echo  $row['lecture_id'] ?></td>
-                                            <td><?php echo $row['instructorFirstName'] ?> <?php echo $row['instructorLastName'] ?></td>
+                                            <td><?php echo $row['instructor FirstName'] ?> <?php echo $row['instructorLastName'] ?></td>
                                             <td><?php echo $row['title'] ?></td>
-                                            <td><?php echo $row['subjectTitle'] ?></td>
+                                            <td><?php echo $row['subject Title'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
                                             <td><?php echo $row['content_URL'] ?></td>
                                             <td><?php echo $row['creation_date'] ?></td>
-
-                                            
-                                            
-
-
-                                            <td>
+                                             <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
                                                 <a class="btn btn-danger text-white">Delete</a>
                                                 

@@ -98,12 +98,12 @@ $result = $conn->query($sql);
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>1</th>
-                                        <th>Cource Name</th>
+                                        <th>Course Name</th>
                                         <th>Number Of Students</th>
                                         <th>Category</th>
                                         <th>Start Date</th>
                                         <th>End Date</th>
-                                        <th>Course_Description</th>
+                                        <th>Course Description</th>
                                     </tr>
                                     <br>
                                     <br>

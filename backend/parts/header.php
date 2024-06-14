@@ -1,3 +1,16 @@
+<div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.php">
+                    <b class="logo-abbr"><img src="" alt=""> </b>
+                    <span class="logo-compact"><img src="" alt=""></span>
+                    <span class="brand-title">
+                        <!-- <img src="images/logo-text.png" alt=""> -->
+                        <h2 class="text-white">LMS</h2>
+                    </span>
+                </a>
+            </div>
+        </div>
+
 <div class="header">    
             <div class="header-content clearfix">
                 

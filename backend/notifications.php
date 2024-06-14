@@ -108,11 +108,7 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['message'] ?></td>
                                             <td><?php echo $row['date_created'] ?></td>
                                             <td><?php echo $row['is_read'] ?></td>
-                                           
-                                            
-
-
-                                            <td>
+                                           <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
                                                 <a class="btn btn-danger text-white">Delete</a>
                                                 

@@ -86,19 +86,19 @@
                                         <th>Tittle</th>
                                         <th>Description</th>
                                         <th>Due Date</th>
+                                        <th>Action</th>
+
                                     </tr>
-                                   
-                                        
-                                       
-                                    </tr>
+                                     </table>
+                                 <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
                                    
                                  </table>
-                                 <td>
-                                            <a class="btn btn-warning text-white">Edit</a>
-                                            <a class="btn btn-danger text-white">Submitt</a>
-                                        </td>
-                                    </tr>
-                                   
+                                
+                                    
                                 
                             </div>
                         </div>

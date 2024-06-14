@@ -91,9 +91,11 @@ $result = $conn->query($sql);
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
+                                        <th>Course Id</th>
+                                        <th>Student Id</th>
+                                        <th>Frome Date</th>
+                                        <th>To Date</th>
+                                          <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
@@ -103,10 +105,6 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['student_id'] ?></td>
                                             <td><?php echo $row['from_date'] ?></td>
                                             <td><?php echo $row['to_date'] ?></td>
-                                            
-                                            
-
-
                                             <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
                                                 <a class="btn btn-danger text-white">Delete</a>

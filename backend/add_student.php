@@ -4,14 +4,26 @@
 <?php include ('parts/head.php') ?>
 
 
-<?php 
-include('parts/connection.php');
+<?php
+include ('parts/connection.php');
 
-// select data from categories table
-$sql = "SELECT * FROM assignment_submission";
-
-// runt the above query
-$result = $conn->query($sql);
+if(isset($_POST['save'])){
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+     $email = $_POST['email'];
+    $address = $_POST['address'];
+    $password = $_POST['password'];
+    $phone= $_POST['phone'];
+ 
+ 
+    $sql = "INSERT INTO students(first_name,last_name,email,address,password,phone,) values('$first_name', '$last_name','$email','$address','$password', '$phone')";
+    $state = $conn->query($sql);
+   
+    if($state){
+        //echo "record added successfully";
+        header("Location: students.php");
+    }
+}
 
 ?>
 
@@ -30,7 +42,7 @@ $result = $conn->query($sql);
     <!--*******************
         Preloader end
     ********************-->
-
+   
 
     <!--**********************************
         Main wrapper start
@@ -85,39 +97,41 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">assignment_submission</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">assignment_submission</h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
-
-                                        <tr>
-                                            <td><?php echo  $row['submission_id'] ?></td>
-                                            <td><?php echo $row['submission_id'] ?></td>
-                                            <td><?php echo $row['submission_date'] ?></td>
-                                            <td><?php echo $row['description'] ?></td>
-                                            
-                                            
-
-
-                                            <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
-                                        </tr>
-
-                                    <?php } ?>
-
+                                <h4 class="card-title"> students</h4>
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">FirstName</label>
+                                        <input type="text" class="form-control" id="name" name="first_name">
+                                         
+                                    </div>
                                     
-                                 </table>
+                                    <div class="form-group">
+                                        <label for="name">LastName</label>
+                                        <input type="text" class="form-control" id="name" name="last_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Email</label>
+                                        <input type="email" class="form-control" id="name" name="email">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Address</label>
+                                        <input type="addtress" class="form-control" id="name" name="address">
+                                         </div>
+                                         <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input type="password" class="form-control" id="name" name="password">
+                                         </div>
+                                         <div class="form-group">
+                                        <label for="name">Phone</label>
+                                        <input type="phone" class="form-control" id="name" name="phone">
+                                         </div>
+                                       <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -140,7 +154,7 @@ $result = $conn->query($sql);
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************

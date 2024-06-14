@@ -104,7 +104,7 @@ if(isset($_POST['save'])){
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Cource Name</label>
+                                        <label for="name">Course Name</label>
                                         <input type="text" class="form-control" id="name" name="course_name">
                                          
                                     </div>

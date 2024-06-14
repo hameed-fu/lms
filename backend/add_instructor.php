@@ -97,25 +97,25 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">instructor</h4>
+                                <h4 class="card-title">Instructor</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">first name</label>
+                                        <label for="name">First Name</label>
                                         <input type="text" class="form-control" id="name" name="first_name">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">last_name</label>
+                                        <label for="exampleInputPassword1">Last Name</label>
                                         <textarea name="last_name" class="form-control"  id=""></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">email</label>
+                                        <label for="name">Email</label>
                                         <input type="text" class="form-control" id="name" name="email">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">password</label>
+                                        <label for="name">Password</label>
                                         <input type="text" class="form-control" id="name" name="password">
                                          
                                     </div>
