@@ -14,15 +14,16 @@ if(isset($_POST['save'])){
     $description = $_POST['description'];
     $content_URL = $_POST['content_URL'];
     $creation_date = date('Y-m-d H:i:s');
-    
+    $last_updated = date('Y-m-d H:i:s');
     
 
+
     
-    $sql = "INSERT INTO lectures(instructor_id,tittle,subject_id,description,content_URL,creation_date) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date')";
+    $sql = "INSERT INTO lectures(instructor_id,title,subject_id,description,content_URL,creation_date,last_updated) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date','$last_updated')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: courses.php");
+        header("Location: lectures.php");
     }
 }
 
@@ -105,9 +106,10 @@ if(isset($_POST['save'])){
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Instructor id</label>
+                                        <label for="name">Instructor</label>
                                         <?php 
-                                            $sql = "SELECT * FROM lectures";
+
+                                            $sql = "SELECT * FROM instructors";
                                             // runt the above query
                                             $result = $conn->query($sql);
 
@@ -115,22 +117,36 @@ if(isset($_POST['save'])){
                                         <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
                                             <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
+                                                <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
                                          
                                     </div>
                                          
-                                    </div>
+                                     
                                    
                                     <div class="form-group">
                                         <label for="name">Title</label>
                                         <input type="text" class="form-control" id="name" name="tittle">
                                          
                                     </div>
+                                    
+
                                     <div class="form-group">
-                                        <label for="name">Subject id</label>
-                                        <input type="text" class="form-control" id="name" name="subject_id">
+                                        <label for="name">Subject</label>
+                                        <?php 
+
+                                            $sql = "SELECT * FROM subjects";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="subject_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?> - <?php echo $row['code'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                          
                                     </div>
                                     <div class="form-group">
@@ -143,19 +159,7 @@ if(isset($_POST['save'])){
                                          
                                     </div>
                     
-                                   
                                     
-
-                                    <div class="form-group">
-                                        <label for="name">Creation date</label>
-                                        <input type="date" class="form-control" id="name" name="cration_date">
-                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Last updated</label>
-                                        <input type="date" class="form-control" id="name" name="last_updated">
-                                         
-                                    </div>
                     
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

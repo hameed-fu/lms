@@ -19,10 +19,10 @@ $result = $conn->query($sql);
 
 include('parts/connection.php');
 // select data from categories table
-$sql = "SELECT subjects.*, courses.course_name 
-from subjects
-join courses on subjects.course_id = courses.course_id
+$sql = "SELECT courses.*, categories.category_name from courses
+join categories on courses.category_id = categories.category_id
 ";
+
 
 // runt the above query
 $result = $conn->query($sql);
@@ -100,7 +100,7 @@ $result = $conn->query($sql);
                                         <th>1</th>
                                         <th>Cource Name</th>
                                         <th>Number Of Students</th>
-                                        <th>Category id</th>
+                                        <th>Category</th>
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Course_Description</th>
@@ -113,7 +113,7 @@ $result = $conn->query($sql);
                                             <td><?php echo  $row['course_id'] ?></td>
                                             <td><?php echo $row['course_name'] ?></td>
                                             <td><?php echo $row['course_description'] ?></td>
-                                            <td><?php echo $row['category_id'] ?></td>
+                                            <td><?php echo $row['category_name'] ?></td>
                                             <td><?php echo $row['number_of_students'] ?></td>
                                             <td><?php echo $row['start_date'] ?></td>
                                             <td><?php echo $row['end_date'] ?></td>

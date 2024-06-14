@@ -8,7 +8,10 @@
 include('parts/connection.php');
 
 // select data from categories table
-$sql = "SELECT * FROM lectures";
+$sql = "SELECT lectures.*, instructors.first_name as instructorFirstName, instructors.last_name as instructorLastName, subjects.title as subjectTitle FROM lectures
+join instructors on lectures.instructor_id = instructors.instructor_id
+join subjects on lectures.subject_id = subjects.subject_id
+";
 
 // runt the above query
 $result = $conn->query($sql);
@@ -91,26 +94,25 @@ $result = $conn->query($sql);
                                 <h4 class="card-title">lectures</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>1</th>
-                                        <th>Instructor id</th>
-                                        <th>Tittle</th>
-                                        <th>Subject id</th>
+                                        <th>ID</th>
+                                        <th>Instructor</th>
+                                        <th>Title</th>
+                                        <th>Subject</th>
                                         <th>Description</th>
                                         <th>Content URL</th>
                                         <th>Creation date</th>
-                                        <th>Last updated</th>
+                                        <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
                                         <tr>
                                             <td><?php echo  $row['lecture_id'] ?></td>
-                                            <td><?php echo $row['instructor_name'] ?></td>
-                                            <td><?php echo $row['subject_description'] ?></td>
-                                            <td><?php echo $row['description'] ?></td>
+                                            <td><?php echo $row['instructorFirstName'] ?> <?php echo $row['instructorLastName'] ?></td>
                                             <td><?php echo $row['title'] ?></td>
+                                            <td><?php echo $row['subjectTitle'] ?></td>
+                                            <td><?php echo $row['description'] ?></td>
                                             <td><?php echo $row['content_URL'] ?></td>
                                             <td><?php echo $row['creation_date'] ?></td>
-                                            <td><?php echo $row['last_updated'] ?></td>
 
                                             
                                             
