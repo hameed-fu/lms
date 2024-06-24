@@ -8,17 +8,20 @@
 include ('parts/connection.php');
 
 if(isset($_POST['save'])){
-    $user_id = $_POST['user_id'];
-    $course_id = $_POST['course_id'];
-    $message = $_POST['message'];
-    $date_created = date('Y-m-d H:i:s');
-   
+    $course_name = $_POST['course_name'];
+    $course_description = $_POST['course_description'];
+    $number_of_students = $_POST['number_of_students'];
+    $category_id = $_POST['category_id'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
     
-    $sql = "INSERT INTO notifications(user_id,course_id,message,date_created,is_read) values('$user_id', '$course_id','$message','date_created','$is_read')";
+
+    
+    $sql = "INSERT INTO courses(course_name, course_description,number_of_students,category_id,start_date,end_date) values('$course_name','$course_description','$number_of_students',' $category_id','$start_date','$end_date')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: notifications.php");
+        header("Location: courses.php");
     }
 }
 
@@ -101,47 +104,46 @@ if(isset($_POST['save'])){
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">User Id</label>
-                                        <input type="text" class="form-control" id="name" name="user_id">
-                                        <?php 
-                                            $sql = "SELECT * FROM instructor_id";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
-
-                                        ?>
-                                         <select name="instructor_id" class="form-control">
-                                            <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['course_name'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                       
+                                        <label for="name">Cource Name</label>
+                                        <input type="text" class="form-control" id="name" name="course_name">
+                                         
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Course Id</label>
-                                        <input type="text" class="form-control" id="name" name="course_id">
+                                        <label for="exampleInputPassword1">Number Of Students</label>
+                                        <textarea name="number_of_students" class="form-control"  id=""></textarea>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Category_Id</label>
                                         <?php 
+
                                             $sql = "SELECT * FROM courses";
                                             // runt the above query
                                             $result = $conn->query($sql);
 
                                         ?>
-                                        <select name="course_id" class="form-control">
+                                        <select name="courses" class="form-control">
                                             <option>Please Select</option>
                                             <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
+                                                <option value="<?php echo $row['catergory_Id'] ?>"></option>
                                             <?php } ?>
                                         </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name"> Start Date</label>
+                                        <input type="date" class="form-control" id="name" name="start_date">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Message</label>
-                                        <textarea type="text" class="form-control" id="name" name="message"></textarea>
-                                         
+                                        <label for="exampleInputPassword1">End Date</label>
+                                        <input type="date" name="end_date" class="form-control"  id="">
                                     </div>
-                                     
-                                     
-                                   
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">course_description</label>
+                                        <textarea name="course_description" class="form-control"  id=""></textarea>
+                                    </div>
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
