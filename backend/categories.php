@@ -4,20 +4,14 @@
 <?php include ('parts/head.php') ?>
 
 
-<?php
-include ('parts/connection.php');
+<?php 
+include('parts/connection.php');
 
-if(isset($_POST['save'])){
-    $category_name = $_POST['category_name'];
-    $category_description = $_POST['category_description'];
-    
-    $sql = "INSERT INTO categories(category_name, description) values('$category_name', '$category_description')";
-    $state = $conn->query($sql);
-    if($state){
-        //echo "record added successfully";
-        header("Location: categories.php");
-    }
-}
+// select data from categories table
+$sql = "SELECT * FROM categories";
+
+// runt the above query
+$result = $conn->query($sql);
 
 ?>
 
@@ -91,24 +85,36 @@ if(isset($_POST['save'])){
 
                 <div class="row">
                     <div class="col-12">
-
+                        <a href="add_category.php" class="btn btn-primary mb-1">Add New Category</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add New Category</h4>
-                            
-                                <form method="post" action="">
-                                    <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="category_name">
-                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="category_description" class="form-control"  id="category_description"></textarea>
-                                    </div>
+                                <h4 class="card-title">Categories</h4>
+                                 <table class="table table-hover table-striped">
+                                    <tr>
+                                        <th>1</th>
+                                        <th>Category Id</th>
+                                        <th>Category Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                    <?php while($row = $result->fetch_assoc()){ ?>
+
+                                        <tr>
+                                            <td><?php echo  $row['category_id'] ?></td>
+                                            <td><?php echo $row['category_name'] ?></td>
+                                            <td><?php echo $row['description'] ?></td>
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
                                     
-                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
-                                </form>
+                                 </table>
                             </div>
                         </div>
                     </div>
@@ -131,7 +137,7 @@ if(isset($_POST['save'])){
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper endd
+        Main wrapper end
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************
