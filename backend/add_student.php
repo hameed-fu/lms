@@ -16,7 +16,7 @@ if(isset($_POST['save'])){
     $phone= $_POST['phone'];
  
  
-    $sql = "INSERT INTO students(first_name,last_name,email,address,password,phone,) values('$first_name', '$last_name','$email','$address','$password', '$phone')";
+    $sql = "INSERT INTO students(first_name,last_name,email,address,password,phone) values('$first_name', '$last_name','$email','$address','$password', '$phone')";
     $state = $conn->query($sql);
    
     if($state){

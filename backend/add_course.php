@@ -17,7 +17,7 @@ if(isset($_POST['save'])){
     
 
     
-    $sql = "INSERT INTO courses(course_name, course_description,number_of_students,category_id,start_date,end_date) values('$course_name','$course_description','$number_of_students',' $category_id','$start_date','$end_date')";
+    $sql = "INSERT INTO courses(course_name, course_description,category_id,number_of_students,start_date,end_date) values('$course_name','$course_description',' $category_id','$number_of_students','$start_date','$end_date')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -110,12 +110,25 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Number Of Students</label>
-                                        <textarea name="number_of_students" class="form-control"  id=""></textarea>
+                                        <input type="text" name="number_of_students" class="form-control"  id="">
                                     </div>
                                    
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Category_Id</label>
-                                        <textarea name="category_id" class="form-control"  id=""></textarea>
+                                        <label for="exampleInputPassword1">Category</label>
+
+                                        <?php 
+
+                                            $sql = "SELECT * FROM categories";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="category_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option value="<?php echo $row['category_id'] ?>"><?php echo $row['category_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -129,7 +142,7 @@ if(isset($_POST['save'])){
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">course_description</label>
+                                        <label for="exampleInputPassword1">Course Description</label>
                                         <textarea name="course_description" class="form-control"  id=""></textarea>
                                     </div>
                                     

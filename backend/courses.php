@@ -104,6 +104,7 @@ $result = $conn->query($sql);
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Course Description</th>
+                                        <th>Action</th>
                                     </tr>
                                     <br>
                                     <br>
@@ -117,6 +118,11 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['number_of_students'] ?></td>
                                             <td><?php echo $row['start_date'] ?></td>
                                             <td><?php echo $row['end_date'] ?></td>
+                                            <td>
+                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a href="delete_course.php?id=<?php echo $row['course_id'] ?>" class="btn btn-danger text-white">Delete</a>
+                                                
+                                            </td>
                                             
 
 
@@ -127,11 +133,7 @@ $result = $conn->query($sql);
 
                                     
                                  </table>
-                                 <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
+                                
                             </div>
                         </div>
                     </div>

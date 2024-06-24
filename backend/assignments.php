@@ -4,11 +4,14 @@
 <?php include ('parts/head.php') ?>
 
 
-<?php 
-include('parts/connection.php');
+<?php
+include ('parts/connection.php');
 
 // select data from categories table
-$sql = "SELECT * FROM assignments";
+$sql = "SELECT assignments.*, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName, lectures.title as LectureTitle FROM assignments
+join instructors on instructors.instructor_id = assignments.instructor_id
+join lectures on lectures.lecture_id = assignments.lecture_id
+";
 
 // runt the above query
 $result = $conn->query($sql);
@@ -85,44 +88,47 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_instructor.php" class="btn btn-primary mb-1">assignments</a>
+                        <a href="add_assignment.php" class="btn btn-primary mb-1">Add Assigment</a>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">assignments</h4>
-                                 <table class="table table-hover table-striped">
+                                <h4 class="card-title">Assignments</h4>
+                                <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>1</th>
-                                        <th>Assignment id</th>
-                                        <th>Instructor id</th>
-                                        <th>Lecture id</th>
-                                        <th>Tittle</th>
+                                        <th>Instructor</th>
+                                        <th>Lecture</th>
+                                        <th>Title</th>
                                         <th>Description</th>
                                         <th>Due Date</th>
+                                        <th>Assignments</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
+                                    <?php while ($row = $result->fetch_assoc()) { ?>
 
                                         <tr>
-                                            <td><?php echo  $row['assignment_id'] ?></td>
-                                            <td><?php echo $row['instructor_id'] ?></td>
-                                            <td><?php echo $row['lecture_id'] ?></td>
+                                            <td><?php echo $row['InstructorFirstName'] ?>
+                                                <?php echo $row['InstructorLastName'] ?></td>
+                                            <td><?php echo $row['LectureTitle'] ?></td>
                                             <td><?php echo $row['title'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
                                             <td><?php echo $row['due_date'] ?></td>
-                                            
-                                            
 
 
                                             <td>
+                                                <a class="btn btn-primary text-white">View</a>
+                                            </td>
+
+                                            <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
+                                                <a href="delete_assignment.php?id=<?php echo $row['assignment_id'] ?>"
+                                                    class="btn btn-danger text-white">Delete</a>
+
                                             </td>
                                         </tr>
 
                                     <?php } ?>
 
-                                    
-                                 </table>
+
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -11,8 +11,7 @@ if(isset($_POST['save'])){
     $user_id = $_POST['user_id'];
     $course_id = $_POST['course_id'];
     $message = $_POST['message'];
-    $date_created = $_POST['date_created'];
-    $is_read= $_POST['is_read'];
+    $date_created = date('Y-m-d H:i:s');
    
     
     $sql = "INSERT INTO notifications(user_id,course_id,message,date_created,is_read) values('$user_id', '$course_id','$message','date_created','$is_read')";
@@ -113,19 +112,11 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Message</label>
-                                        <input type="text" class="form-control" id="name" name="message">
+                                        <textarea type="text" class="form-control" id="name" name="message"></textarea>
                                          
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name">Date Created</label>
-                                        <input type="date" class="form-control" id="name" name="date_crated">
-                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Is Read</label>
-                                        <input type="text" class="form-control" id="name" name="is_read">
-                                         
-                                    </div>
+                                     
+                                     
                                    
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

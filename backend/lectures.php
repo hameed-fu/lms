@@ -107,9 +107,9 @@ $result = $conn->query($sql);
 
                                         <tr>
                                             <td><?php echo  $row['lecture_id'] ?></td>
-                                            <td><?php echo $row['instructor FirstName'] ?> <?php echo $row['instructorLastName'] ?></td>
+                                            <td><?php echo $row['instructorFirstName'] ?> <?php echo $row['instructorLastName'] ?></td>
                                             <td><?php echo $row['title'] ?></td>
-                                            <td><?php echo $row['subject Title'] ?></td>
+                                            <td><?php echo $row['subjectTitle'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
                                             <td><?php echo $row['content_URL'] ?></td>
                                             <td><?php echo $row['creation_date'] ?></td>

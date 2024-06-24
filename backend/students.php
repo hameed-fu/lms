@@ -85,7 +85,7 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_student.php" class="btn btn-primary mb-1">Add New Students</a>
+                        <a href="add_student.php" class="btn btn-primary mb-1">Add New Student</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Students</h4>
@@ -110,7 +110,7 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['phone'] ?></td>
                                             <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
+                                                <a href="delete_student.php?id=<?php echo $row['student_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
                                         </tr>
