@@ -8,7 +8,10 @@
 include('parts/connection.php');
 
 // select data from categories table
-$sql = "SELECT * FROM notifications";
+$sql = "SELECT notifications.*, courses.course_name, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName   FROM notifications
+join instructors on notifications.user_id = instructors.instructor_id
+join courses on notifications.course_id = courses.course_id
+";
 
 // runt the above query
 $result = $conn->query($sql);
@@ -92,22 +95,20 @@ $result = $conn->query($sql);
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>1</th>
-                                        <th>User Id</th>
-                                        <th>Course Id</th>
+                                        <th>Instructor</th>
+                                        <th>Course</th>
                                         <th>Message</th>
                                         <th>Date Created</th>
-                                        <th>Is Read</th>
                                         <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
 
                                         <tr>
                                             <td><?php echo  $row['notification_id'] ?></td>
-                                            <td><?php echo $row['user_id'] ?></td>
-                                            <td><?php echo $row['course_id'] ?></td>
+                                            <td><?php echo $row['InstructorFirstName'] ?> <?php echo $row['InstructorLastName'] ?> </td>
+                                            <td><?php echo $row['course_name'] ?></td>
                                             <td><?php echo $row['message'] ?></td>
                                             <td><?php echo $row['date_created'] ?></td>
-                                            <td><?php echo $row['is_read'] ?></td>
                                            <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
                                                 <a class="btn btn-danger text-white">Delete</a>
@@ -119,11 +120,7 @@ $result = $conn->query($sql);
 
                                     
                                  </table>
-                                 <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
+                                 
                             </div>
                         </div>
                     </div>
