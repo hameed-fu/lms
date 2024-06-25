@@ -9,7 +9,7 @@
                     <li><a href="students.php">Students</a></li>
                     <li><a href="courses.php">Courses</a></li>
                     <li><a href="assignments.php">Assignments</a></li>
-                    <li><a href="assignements_submission.php">Assignements Submission</a></li>
+                    
                     <li><a href="enrollments.php">Enrollment</a></li>
                      
                     <li><a href="notifications.php">Notification</a></li>
