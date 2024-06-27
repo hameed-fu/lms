@@ -25,7 +25,7 @@ if(isset($_POST['save'])){
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     
-    $sql = "UPDATE  courses set cource_name = '$course_name', course_description = '$course_description', category_id ='$category_id', numbers_of_stuents = '$number_of_students',start_date = '$start_date',end_date, = '$end_date'";
+    $sql = "UPDATE  courses set course_name = '$course_name', course_description = '$course_description', category_id ='$category_id', number_of_students = '$number_of_students',start_date =  '$start_date',end_date = '$end_date' ";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -130,7 +130,7 @@ if(isset($_POST['save'])){
                                     
                                     <div class="form-group">
                                         <label for="name">Number of student</label>
-                                        <input type="text" class="form-control" value="<?php echo $row['number_of_students'] ?>" id="phone" name="number_of_stuents">
+                                        <input type="text" class="form-control" value="<?php echo $row['number_of_students'] ?>" id="phone" name="number_of_students">
                                          
                                     </div>
                                     <div class="form-group">
