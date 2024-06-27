@@ -124,7 +124,7 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['content_URL'] ?></td>
                                             <td><?php echo $row['creation_date'] ?></td>
                                              <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a href="edit_lectures.php?id=<?php echo $row['lecture_id'] ?> " class="btn btn-warning text-white">Edit</a>
                                                 <a href="delete_lectures.php?id=<?php echo $row['lecture_id'] ?>"class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>

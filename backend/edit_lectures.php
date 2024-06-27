@@ -1,47 +1,31 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
-include ('parts/head.php');
- ?>
+<?php include ('parts/head.php') ?>
 
 
 <?php
 include ('parts/connection.php');
 
-if(isset($_POST['save'])){
-    $course_name = $_POST['course_name'];
-    $course_description = $_POST['course_description'];
-    $number_of_students = $_POST['number_of_students'];
-    $category_id = $_POST['category_id'];
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
-    
 
+
+
+if(isset($_POST['save'])){
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $phone = $_POST['phone'];
+    $instructor_id = $_POST['instructor_id'];
     
-    $sql = "INSERT INTO courses(course_name, course_description,category_id,number_of_students,start_date,end_date) values('$course_name','$course_description',' $category_id','$number_of_students','$start_date','$end_date')";
+    $sql = "UPDATE  lectures set first_name = '$first_name', last_name = '$last_name', email ='$email','password='$password', phone = '$phone',instructor_id='$instructor'_id where lecture_id = $lecture_id";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: courses.php");
+        header("Location: lectures.php");
     }
 }
+
 
 ?>
 
@@ -115,57 +99,84 @@ if(isset($_POST['save'])){
 
                 <div class="row">
                     <div class="col-12">
-
+    <?php 
+    
+    
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+       
+        $sql = "select * from lectures where lecture_id =  $id";
+        $result = $conn->query($sql);
+        $lecture = $result->fetch_array();
+    
+    
+    }
+    ?>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"></h4>
-                            
+                                <h4 class="card-title"> Lectures</h4>
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Course Name</label>
-                                        <input type="text" class="form-control" id="name" name="course_name">
-                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Number Of Students</label>
-                                        <input type="text" name="number_of_students" class="form-control"  id="">
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Category</label>
-
+                                        <label for="name">Lectures</label>
                                         <?php 
 
-                                            $sql = "SELECT * FROM categories";
+                                            $sql = "SELECT * FROM instructors";
                                             // runt the above query
                                             $result = $conn->query($sql);
 
                                         ?>
-                                        <select name="category_id" class="form-control">
+                                        <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
                                             <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['category_id'] ?>"><?php echo $row['category_name'] ?></option>
+                                                <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
+                                         
                                     </div>
+                                         
+                                     
+                                   
+                                    <div class="form-group">
+                                        <label for="name">Title</label>
+                                        <input type="text" value="<?php echo $lecture['title'] ?>" class="form-control" id="name" name="tittle">
+                                         
+                                    </div>
+                                    
 
                                     <div class="form-group">
-                                        <label for="name"> Start Date</label>
-                                        <input type="date" class="form-control" id="name" name="start_date">
+                                        <label for="name">Subject</label>
+                                        <?php 
+
+                                            $sql = "SELECT * FROM subjects";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="subject_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?> - <?php echo $row['code'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">End Date</label>
-                                        <input type="date" name="end_date" class="form-control"  id="">
+                                        <label for="exampleInputPassword1">Description</label>
+                                        <textarea name="description" class="form-control"  id=""></textarea>
                                     </div>
-
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Course Description</label>
-                                        <textarea name="course_description" class="form-control"  id=""></textarea>
+                                        <label for="name"> Content URL</label>
+                                        <input type="text" value="<?php echo $row['Content_URL'] ?>" class="form-control" id="name" name="Content_URL">
+                                         
+                                         
                                     </div>
+                    
+                                    
+                    
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
+                                   
                             </div>
                         </div>
                     </div>

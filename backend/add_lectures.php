@@ -1,3 +1,13 @@
+<?php 
+
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header('Location: login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +29,7 @@ if(isset($_POST['save'])){
 
 
     
-    $sql = "INSERT INTO lectures(instructor_id,title,subject_id,description,content_URL,creation_date,last_updated) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date','$last_updated')";
+    $sql = "INSERT INTO lectures(instructor_id,title,subject_id,description,content_URL,creation_date) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";

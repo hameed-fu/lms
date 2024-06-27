@@ -116,7 +116,7 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['enrollment_date'] ?></td>
                                             <td>
                                                 <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
+                                                <a href="delete_Enrollments.php?id=<?php echo $row['enrollment_id'] ?>"class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
                                         </tr>

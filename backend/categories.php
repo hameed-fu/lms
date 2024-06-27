@@ -114,9 +114,12 @@ $result = $conn->query($sql);
                                             <td><?php echo  $row['category_id'] ?></td>
                                             <td><?php echo $row['category_name'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
+                                            <td></td>
                                             <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a class="btn btn-danger text-white">Delete</a>
+
+
+                                                <a href="edit_category.php?id=<?php echo $row['category_id'] ?>"class="btn btn-warning text-white">Edit</a>
+                                                <a href="delete_category.php?id=<?php echo $row['category_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
                                         </tr>

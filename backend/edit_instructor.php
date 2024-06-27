@@ -10,7 +10,7 @@ include ('parts/connection.php');
 if(isset($_GET['id'])){
     $id = $_GET['id'];
      
-    $sql = "select * from instructors where instructor_id =  $id";
+    $sql = "select * from lectures where lectures_id =  $id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
