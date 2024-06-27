@@ -1,22 +1,24 @@
-
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
 
 <?php
 session_start();
-include('parts/connection.php');
+include ('parts/connection.php');
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
-   
+
+
     $sql = "SELECT * from users WHERE email = '$email' AND password = '$password'";
     $state = $conn->query($sql);
-    if($state->num_rows == 1){
+    if ($state->num_rows == 1) {
+
         $user = $state->fetch_assoc();
-        $_SESSION['user_id'] = $user['id'];
+        session_start();
+
+        $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['first_name'] = $user['first_name'];
         header("Location: index.php");
@@ -34,11 +36,11 @@ if(isset($_POST['submit'])){
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link href="css/style.css" rel="stylesheet">
-    
+
 </head>
 
 <body class="h-100">
-    
+
     <!--*******************
         Preloader start
     ********************-->
@@ -53,7 +55,7 @@ if(isset($_POST['submit'])){
         Preloader end
     ********************-->
 
-    
+
 
 
 
@@ -64,16 +66,20 @@ if(isset($_POST['submit'])){
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href=""> <h4>LMS</h4></a>
-        
+                                <a class="text-center" href="">
+                                    <h4>LMS</h4>
+                                </a>
+
                                 <form class="mt-5 mb-5 login-input" method="post" action="">
                                     <div class="form-group">
                                         <input type="email" name="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control" placeholder="Password">
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Password">
                                     </div>
-                                    <button type="submit" name="submit" class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button type="submit" name="submit" class="btn login-form__btn submit w-100">Sign
+                                        In</button>
                                 </form>
                             </div>
                         </div>
@@ -82,9 +88,9 @@ if(isset($_POST['submit'])){
             </div>
         </div>
     </div>
-    
 
-    
+
+
 
     <!--**********************************
         Scripts
@@ -95,9 +101,5 @@ if(isset($_POST['submit'])){
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
 </body>
+
 </html>
-
-
-
-
-

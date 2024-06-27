@@ -1,3 +1,13 @@
+<?php 
+
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header('Location: login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,8 +119,8 @@ $result = $conn->query($sql);
                                               <td><?php echo $row['address'] ?></td>
                                             <td><?php echo $row['phone'] ?></td>
                                             <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_student.php?id=<?php echo $row['student_id'] ?>" class="btn btn-danger text-white">Delete</a>
+                                                <a  href="edit_students.php?id=<?php echo $row['student_id'] ?>"class="btn btn-warning text-white">Edit</a>
+                                                <a href="delete_student.php?id=<?php echo $row['student_id'] ?>"class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
                                         </tr>

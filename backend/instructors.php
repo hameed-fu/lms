@@ -1,3 +1,13 @@
+<?php 
+
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header('Location: login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,7 +121,7 @@ $result = $conn->query($sql);
 
 
                                             <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a href="edit_instructor.php?id=<?php echo $row['instructor_id'] ?>" class="btn btn-warning text-white">Edit</a>
                                                 <a class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>

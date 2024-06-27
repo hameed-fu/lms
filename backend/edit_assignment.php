@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
-include ('parts/head.php');
- ?>
+<?php include ('parts/head.php') ?>
 
 
 <?php
 include ('parts/connection.php');
 
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+     
+    $sql = "select * from assignments where assignment_id =  $id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+}
+
+
 if(isset($_POST['save'])){
-    $course_name = $_POST['course_name'];
-    $course_description = $_POST['course_description'];
-    $number_of_students = $_POST['number_of_students'];
-    $category_id = $_POST['category_id'];
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
-    
+    $instructor_id = $_POST['instructor_id'];
+    $lecture_id = $_POST['lecture_id'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $due_date = $_POST['due_date'];
 
     
-    $sql = "INSERT INTO courses(course_name, course_description,category_id,number_of_students,start_date,end_date) values('$course_name','$course_description',' $category_id','$number_of_students','$start_date','$end_date')";
+    $sql = "UPDATE  assignments set instructor_id = '$instructor_id',lecture_id  = '$lecture_id', title ='$tite', description = '$description',due_date = '$due_date'";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: courses.php");
+        header("Location: assignments.php");
     }
 }
+
 
 ?>
 
@@ -108,52 +109,39 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"></h4>
+                                <h4 class="card-title"> Eidt Student</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Course Name</label>
-                                        <input type="text" class="form-control" id="name" name="course_name">
+                                        <label for="name">instructor</label>
+                                        <input type="text" value="<?php echo $row['instructor_id'] ?>" class="form-control" id="name" name="instructor_id">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Number Of Students</label>
-                                        <input type="text" name="number_of_students" class="form-control"  id="">
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Category</label>
+                                        <label for="exampleInputPassword1">lecture</label>
+                                        <input type="text" value="<?php echo $row['lecture_id'] ?>" class="form-control" id="name" name="lecture_id">
 
-                                        <?php 
-
-                                            $sql = "SELECT * FROM categories";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
-
-                                        ?>
-                                        <select name="category_id" class="form-control">
-                                            <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['category_id'] ?>"><?php echo $row['category_name'] ?></option>
-                                            <?php } ?>
-                                        </select>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="name"> Start Date</label>
-                                        <input type="date" class="form-control" id="name" name="start_date">
-                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">End Date</label>
-                                        <input type="date" name="end_date" class="form-control"  id="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Course Description</label>
-                                        <textarea name="course_description" class="form-control"  id=""></textarea>
-                                    </div>
+                    
                                     
+                                    <div class="form-group">
+                                        <label for="name">title</label>
+                                        <input type="text" class="form-control" value="<?php echo $row['title'] ?>" id="phone" name="phone">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">description</label>
+                                        <input type="text" class="form-control" value="<?php echo $row['description'] ?>" id="phone" name="phone">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name"> due date</label>
+                                        <input type="date" class="form-control" value="<?php echo $row['due_date'] ?>" id="phone" name="due_date">
+                                         
+                                    </div>
+    
+                            
+
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
