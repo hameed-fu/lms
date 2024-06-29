@@ -123,12 +123,14 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['code'] ?></td>
                                             <td><?php echo $row['course_name'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
-                                            <td>
+                                          
+                                        </tr>
+                                        <td>
+                                                
                                                 <a class="btn btn-warning text-white">Edit</a>
                                                 <a href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
-                                        </tr>
 
                                         <?php } ?>
                                      

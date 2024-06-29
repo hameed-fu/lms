@@ -10,7 +10,7 @@ include ('parts/connection.php');
 if(isset($_GET['id'])){
     $id = $_GET['id'];
      
-    $sql = "select * from courses where course_id =  $id";
+    $sql = "select * from subjects where subject_id =  $id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
@@ -18,18 +18,18 @@ if(isset($_GET['id'])){
 
 
 if(isset($_POST['save'])){
-    $course_name = $_POST['course_name'];
-    $course_description = $_POST['course_description'];
-    $category_id = $_POST['category_id'];
-    $number_of_students = $_POST['number_of_students']; 
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
+    $subject_id = $_POST['subject_id'];
+    $title = $_POST['title'];
+    $code = $_POST['code'];
+    $description = $_POST['description'];
+    $course_id = $_POST['course_id'];
+
     
-    $sql = "UPDATE  courses set course_name = '$course_name', course_description = '$course_description', category_id ='$category_id', number_of_students = '$number_of_students',start_date =  '$start_date',end_date = '$end_date' ";
+    $sql = "UPDATE  subjects set subject_id = '$subject_id', title = '$title', code ='$code', description = '$description',course_id = '$course_id'";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
-        header("Location: courses.php");
+        header("Location: subjects.php");
     }
 }
 
@@ -109,62 +109,36 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">edit courses</h4>
+                                <h4 class="card-title"> Eidt Subject</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Course Name</label>
-                                        <input type="text" value="<?php echo $row['course_name'] ?>" class="form-control" id="name" name="course_name">
-                                     
-                                         
-                                    
+                                        <label for="name">Subject Id</label>
+                                        <input type="text" value="<?php echo $row['subject_id'] ?>" class="form-control" id="name" name="subject_id">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Course Description</label>
-                                        <input type="text" value="<?php echo $row['course_description'] ?>" class="form-control" id="name" name="course_description">
-
-
-
-
-                                        
+                                        <label for="exampleInputPassword1">title</label>
+                                        <input type="text" value="<?php echo $row['title'] ?>" class="form-control" id="name" name="title">
 
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Category_Id</label>
-                                        <?php 
-
-                                            $sql = "SELECT * FROM categories";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
-
-                                        ?>
-                                        <select name="category_id" class="form-control">
-                                            <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['catergory_Id'] ?>"></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
+                    
                                     
                                     <div class="form-group">
-                                        <label for="name">Number of student</label>
-                                        <input type="text" class="form-control" value="<?php echo $row['number_of_students'] ?>" id="phone" name="number_of_students">
+                                </div>
+                                    <div class="form-group">
+                                        <label for="name">description</label>
+                                        <input type="text" class="form-control" value="<?php echo $row['description'] ?>" id=" "name="description">
                                          
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Start Date</label>
-                                        <input type="date" class="form-control" value="<?php echo $row['start_date'] ?>" id="phone" name="start_date">
+                                        <label for="name"> due date</label>
+                                        <input type="date" class="form-control" value="<?php echo $row['due_date'] ?>" id="" name="date">
                                          
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name">End date</label>
-                                        <input type="date" class="form-control" value="<?php echo $row['end_date'] ?>" id="phone" name="end_date">
-                                         
-                                    </div>
-                                    <input type="hidden" value="<?php echo $row['course_id'] ?>" name="course_id">
-                                   
-                                    
+    
+                            
+
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
