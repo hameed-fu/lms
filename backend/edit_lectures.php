@@ -12,7 +12,6 @@ include ('parts/connection.php');
 
 if(isset($_POST['save'])){
     
- 
     $title = $_POST['title'];
     $subject_id = $_POST['subject_id'];
     $description = $_POST['description'];
@@ -24,7 +23,7 @@ if(isset($_POST['save'])){
     $sql = "UPDATE  lectures set instructor_id = '$instructor_id', title = '$title', subject_id ='$subject_id',description='$description', content_URL = '$Content_URL'  where lecture_id = $lecture_id";
     $state = $conn->query($sql);
     if($state){
-        //echo "record added successfully";
+        
         header("Location: lectures.php");
     }
 }
