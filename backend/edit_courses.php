@@ -24,8 +24,9 @@ if(isset($_POST['save'])){
     $number_of_students = $_POST['number_of_students']; 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $course_id = $_POST['course_id'];
     
-    $sql = "UPDATE  courses set course_name = '$course_name', course_description = '$course_description', category_id ='$category_id', number_of_students = '$number_of_students',start_date =  '$start_date',end_date = '$end_date' ";
+    $sql = "UPDATE  courses set course_name = '$course_name', course_description = '$course_description', category_id ='$category_id', number_of_students = '$number_of_students',start_date =  '$start_date',end_date = '$end_date' where course_id = '$course_id'";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -131,7 +132,7 @@ if(isset($_POST['save'])){
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Category_Id</label>
+                                        <label for="exampleInputPassword1">Category</label>
                                         <?php 
 
                                             $sql = "SELECT * FROM categories";
@@ -141,8 +142,8 @@ if(isset($_POST['save'])){
                                         ?>
                                         <select name="category_id" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['catergory_Id'] ?>"></option>
+                                            <?php while($category = $result->fetch_assoc()){ ?>
+                                                <option <?php echo $category['category_id'] == $row['category_id'] ? 'selected' : '' ?> value="<?php echo $category['category_id'] ?>"><?php echo $category['category_name'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

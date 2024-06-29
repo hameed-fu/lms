@@ -12,12 +12,7 @@ if(!isset($_SESSION['user_id'])){
 <html lang="en">
 
 <?php
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+ 
 include ('parts/head.php');
  ?>
 
