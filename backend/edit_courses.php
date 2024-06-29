@@ -124,6 +124,8 @@ if(isset($_POST['save'])){
                                         <label for="exampleInputPassword1">Course Description</label>
                                         <input type="text" value="<?php echo $row['course_description'] ?>" class="form-control" id="name" name="course_description">
 
+
+                                        
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Category_Id</label>
