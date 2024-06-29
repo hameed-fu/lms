@@ -11,14 +11,17 @@ include ('parts/connection.php');
 
 
 if(isset($_POST['save'])){
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $phone = $_POST['phone'];
-    $instructor_id = $_POST['instructor_id'];
     
-    $sql = "UPDATE  lectures set first_name = '$first_name', last_name = '$last_name', email ='$email','password='$password', phone = '$phone',instructor_id='$instructor'_id where lecture_id = $lecture_id";
+ 
+    $title = $_POST['title'];
+    $subject_id = $_POST['subject_id'];
+    $description = $_POST['description'];
+    $instructor_id = $_POST['instructor_id'];
+    $Content_URL = $_POST['Content_URL'];
+    $lecture_id = $_POST['lecture_id'];
+   
+    
+    $sql = "UPDATE  lectures set instructor_id = '$instructor_id', title = '$title', subject_id ='$subject_id',description='$description', content_URL = '$Content_URL'  where lecture_id = $lecture_id";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -117,7 +120,7 @@ if(isset($_POST['save'])){
                                 <h4 class="card-title"> Lectures</h4>
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Lectures</label>
+                                        <label for="name">Instructor</label>
                                         <?php 
 
                                             $sql = "SELECT * FROM instructors";
@@ -128,7 +131,7 @@ if(isset($_POST['save'])){
                                         <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
                                             <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
+                                                <option <?php echo $row['instructor_id'] == $lecture['instructor_id'] ? 'selected' : '' ?> value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
                                          
@@ -138,7 +141,7 @@ if(isset($_POST['save'])){
                                    
                                     <div class="form-group">
                                         <label for="name">Title</label>
-                                        <input type="text" value="<?php echo $lecture['title'] ?>" class="form-control" id="name" name="tittle">
+                                        <input type="text" value="<?php echo $lecture['title'] ?>" class="form-control" id="name" name="title">
                                          
                                     </div>
                                     
@@ -155,23 +158,23 @@ if(isset($_POST['save'])){
                                         <select name="subject_id" class="form-control">
                                             <option>Please Select</option>
                                             <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?> - <?php echo $row['code'] ?></option>
+                                                <option <?php echo $row['subject_id'] == $lecture['subject_id'] ? 'selected' : '' ?> value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?> - <?php echo $row['code'] ?></option>
                                             <?php } ?>
                                         </select>
                                          
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="description" class="form-control"  id=""></textarea>
+                                        <textarea name="description" class="form-control"  id=""><?php echo $lecture['description'] ?></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="name"> Content URL</label>
-                                        <input type="text" value="<?php echo $row['Content_URL'] ?>" class="form-control" id="name" name="Content_URL">
+                                        <input type="text" value="<?php echo $lecture['content_URL'] ?>" class="form-control" id="name" name="Content_URL">
                                          
                                          
                                     </div>
                     
-                                    
+                                    <input type="hidden" name="lecture_id" value="<?php echo $lecture['lecture_id'] ?>">
                     
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
