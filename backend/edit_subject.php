@@ -1,31 +1,37 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include ('parts/head.php') ?>
 
 
-<?php 
+<?php
+include ('parts/connection.php');
 
-include('parts/connection.php');
-// select data from categories table
-$sql = "SELECT subjects.*, courses.course_name 
-from subjects
-join courses on subjects.course_id = courses.course_id
-";
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+     
+    $sql = "select * from subjects where subject_id =  $id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
 
-// runt the above query
-$result = $conn->query($sql);
+}
 
+
+if(isset($_POST['save'])){
+    $subject_id = $_POST['subject_id'];
+    $title = $_POST['title'];
+    $code = $_POST['code'];
+    $description = $_POST['description'];
+    $course_id = $_POST['course_id'];
+
+    
+    $sql = "UPDATE  subjects set subject_id = '$subject_id', title = '$title', code ='$code', description = '$description',course_id = '$course_id'";
+    $state = $conn->query($sql);
+    if($state){
+        //echo "record added successfully";
+        header("Location: subjects.php");
+    }
+}
 
 
 ?>
@@ -100,41 +106,41 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_subject.php" class="btn btn-primary mb-1">Add New subject</a>
+
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Subjects</h4>
-                                 <table class="table table-hover table-striped">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Title</th>
-                                        <th>Code</th>
-                                        <th>Course</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                        
-                                        
-                                    </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
+                                <h4 class="card-title"> Eidt Subject</h4>
+                            
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label for="name">Subject Id</label>
+                                        <input type="text" value="<?php echo $row['subject_id'] ?>" class="form-control" id="name" name="subject_id">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">title</label>
+                                        <input type="text" value="<?php echo $row['title'] ?>" class="form-control" id="name" name="title">
 
-                                        <tr>
-                                            <td><?php echo  $row['subject_id'] ?></td>
-                                            <td><?php echo $row['title'] ?></td>
-                                            <td><?php echo $row['code'] ?></td>
-                                            <td><?php echo $row['course_name'] ?></td>
-                                            <td><?php echo $row['description'] ?></td>
-                                          
-                                        </tr>
-                                        <td>
-                                                
-                                                <a class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
+                                    </div>
+                    
+                                    
+                                    <div class="form-group">
+                                </div>
+                                    <div class="form-group">
+                                        <label for="name">description</label>
+                                        <input type="text" class="form-control" value="<?php echo $row['description'] ?>" id=" "name="description">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name"> due date</label>
+                                        <input type="date" class="form-control" value="<?php echo $row['due_date'] ?>" id="" name="date">
+                                         
+                                    </div>
+    
+                            
 
-                                        <?php } ?>
-                                     
-                                 </table>
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -157,7 +163,7 @@ $result = $conn->query($sql);
         ***********************************-->
     </div>
     <!--**********************************
-        Main wrapper end
+        Main wrapper endd
     ***********************************-->
     <?php include ('parts/footer.php') ?>
     <!--**********************************

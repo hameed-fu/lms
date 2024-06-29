@@ -115,6 +115,9 @@ if(isset($_POST['save'])){
                                     <div class="form-group">
                                         <label for="name">Course Name</label>
                                         <input type="text" value="<?php echo $row['course_name'] ?>" class="form-control" id="name" name="course_name">
+                                     
+                                         
+                                    
                                          
                                     </div>
                                     <div class="form-group">
@@ -123,9 +126,20 @@ if(isset($_POST['save'])){
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Category id</label>
-                                        <input type="text" value="<?php echo $row['category_id'] ?>" class="form-control" id="name" name="category_id">
-                                         
+                                        <label for="exampleInputPassword1">Category_Id</label>
+                                        <?php 
+
+                                            $sql = "SELECT * FROM categories";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="category_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option value="<?php echo $row['catergory_Id'] ?>"></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                     
                                     <div class="form-group">
