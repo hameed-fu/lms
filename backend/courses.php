@@ -129,7 +129,7 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['start_date'] ?></td>
                                             <td><?php echo $row['end_date'] ?></td>
                                             <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a href="edit_courses.php?id=<?php echo $row['course_id'] ?>" class="btn btn-warning text-white">Edit</a>
                                                 <a href="delete_course.php?id=<?php echo $row['course_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
@@ -138,6 +138,8 @@ $result = $conn->query($sql);
 
                                         
                                         </tr>
+                                
+                                            
 
                                     <?php } ?>
 

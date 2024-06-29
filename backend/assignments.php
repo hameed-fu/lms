@@ -128,7 +128,7 @@ $result = $conn->query($sql);
                                             </td>
 
                                             <td>
-                                                <a class="btn btn-warning text-white">Edit</a>
+                                                <a href="edit_assignment.php?id=<?php echo $row['assignment_id'] ?>"   class="btn btn-warning text-white">Edit</a>
                                                 <a href="delete_assignment.php?id=<?php echo $row['assignment_id'] ?>"
                                                     class="btn btn-danger text-white">Delete</a>
 

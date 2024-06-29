@@ -1,13 +1,3 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,23 +7,32 @@ if(!isset($_SESSION['user_id'])){
 <?php
 include ('parts/connection.php');
 
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+     
+    $sql = "select * from students where student_id =  $id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+}
+
+
 if(isset($_POST['save'])){
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
-     $email = $_POST['email'];
-    $address = $_POST['address'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
-    $phone= $_POST['phone'];
- 
- 
-    $sql = "INSERT INTO students(first_name,last_name,email,address,password,phone) values('$first_name', '$last_name','$email','$address','$password', '$phone')";
+    $phone = $_POST['phone'];
+
+    
+    $sql = "UPDATE  students set first_name = '$first_name', last_name = '$last_name', email ='$email', phone = '$phone'";
     $state = $conn->query($sql);
-   
     if($state){
         //echo "record added successfully";
         header("Location: students.php");
     }
 }
+
 
 ?>
 
@@ -52,7 +51,7 @@ if(isset($_POST['save'])){
     <!--*******************
         Preloader end
     ********************-->
-   
+
 
     <!--**********************************
         Main wrapper start
@@ -110,37 +109,34 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">  Edit students</h4>
+                                <h4 class="card-title"> Eidt Student</h4>
+                            
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">FirstName</label>
-                                        <input type="text" class="form-control" id="name" name="first_name">
+                                        <label for="name">First Name</label>
+                                        <input type="text" value="<?php echo $row['first_name'] ?>" class="form-control" id="name" name="first_name">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Last Name</label>
+                                        <input type="text" value="<?php echo $row['last_name'] ?>" class="form-control" id="name" name="last_name">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Email</label>
+                                        <input type="text" value="<?php echo $row['email'] ?>" class="form-control" id="name" name="email">
                                          
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="name">LastName</label>
-                                        <input type="text" class="form-control" id="name" name="last_name">
+                                        <label for="name">Phone Number</label>
+                                        <input type="text" class="form-control" value="<?php echo $row['phone'] ?>" id="phone" name="phone">
                                          
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name">Email</label>
-                                        <input type="email" class="form-control" id="name" name="email">
-                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Address</label>
-                                        <input type="addtress" class="form-control" id="name" name="address">
-                                         </div>
-                                         <div class="form-group">
-                                        <label for="name">Password</label>
-                                        <input type="password" class="form-control" id="name" name="password">
-                                         </div>
-                                         <div class="form-group">
-                                        <label for="name">Phone</label>
-                                        <input type="phone" class="form-control" id="name" name="phone">
-                                         </div>
-                                       <button type="submit" name="save" class="btn btn-primary">Submit</button>
+    
+                            
+
+                                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>
