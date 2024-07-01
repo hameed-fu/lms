@@ -18,6 +18,7 @@ if(isset($_GET['id'])){
 
 
 if(isset($_POST['save'])){
+
     $subject_id = $_POST['subject_id'];
     $title = $_POST['title'];
     $code = $_POST['code'];
@@ -26,6 +27,8 @@ if(isset($_POST['save'])){
 
     
     $sql = "UPDATE  subjects set subject_id = '$subject_id', title = '$title', code ='$code', description = '$description',course_id = '$course_id'";
+PDATE  subjects set title = '$title', code ='$code', description = '$description',course_id =$course_id ";
+
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -109,6 +112,7 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
+
                                 <h4 class="card-title"> Eidt Subject</h4>
                             
                                 <form method="post" action="">
@@ -137,7 +141,7 @@ if(isset($_POST['save'])){
                                          
                                     </div>
     
-                            
+
 
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
