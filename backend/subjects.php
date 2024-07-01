@@ -125,7 +125,7 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['description'] ?></td>
 
                                              <td>
-                                                <a href="edit_lectures.php?id=<?php echo $row['subject_id'] ?>"class="btn btn-warning text-white">Edit</a>
+                                                <a href="edit_subject.php?id=<?php echo $row['subject_id'] ?>"class="btn btn-warning text-white">Edit</a>
 
                                                 <a href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 

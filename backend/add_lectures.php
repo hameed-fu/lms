@@ -164,12 +164,15 @@ if(isset($_POST['save'])){
                                         <textarea name="description" class="form-control"  id=""></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name"> Content URL</label>
-                                        <input type="text" class="form-control" id="name" name="content_URL">
-                                         
+                                    <input type="radio" name="type" value="url" class="Lecture" checked> URL
+                                    <input type="radio" name="type" value="file" class="Lecture"> File
                                     </div>
-                    
-                                    
+                                    <div class="form-group">
+                                        <label for="name"> Content URL</label>
+                                        <input type="text" class="form-control" id="urlInput" name="content_URL">
+                                        <input type="file" class="form-control" id="fileInput" name="content_URL" style="display:none">
+                                        
+                                    </div>
                     
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
@@ -204,6 +207,22 @@ if(isset($_POST['save'])){
     ***********************************-->
     <?php include ('parts/script.php') ?>
 
+
+    <script>
+        $(function(){
+             
+            $(".Lecture").change(function() {
+                let type = $(this).val();
+                if(type == "file"){
+                    $("#fileInput").show()
+                    $("#urlInput").hide()
+                }else{
+                    $("#fileInput").hide()
+                    $("#urlInput").show()
+                }
+            });
+        })
+    </script>
 </body>
 
 </html>

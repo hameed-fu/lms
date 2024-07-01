@@ -21,7 +21,7 @@ if(isset($_POST['save'])){
     $user_id = $_POST['instructor_id'];
     $message = $_POST['message'];
     $course_id = $_POST['course_id'];
-    $date_created = date('Y-m-d H:i:s');
+    $date_created = date('Y-m-d');
    
     
     $sql = "INSERT INTO notifications(user_id,course_id,message,date_created) values('$user_id', '$course_id','$message','$date_created')";

@@ -12,7 +12,7 @@ if(isset($_GET['id'])){
      
     $sql = "select * from notifications where notification_id =  $id";
     $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+    $notification = $result->fetch_assoc();
 
 }
 
@@ -22,9 +22,10 @@ if(isset($_POST['save'])){
     $course_id = $_POST['course_id'];
     $message = $_POST['message'];
     $date_created = $_POST['date_created'];
+    $notification_id = $_POST['notification_id'];
 
     
-    $sql = "UPDATE  notifications set user_id = '$user_id', course_id = '$course_id', message ='$message', date_created = '$date_created' where notification_id = $user_id";
+    $sql = "UPDATE  notifications set user_id = '$user_id', course_id = '$course_id', message ='$message', date_created = '$date_created' where notification_id = '$notification_id' ";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -112,35 +113,53 @@ if(isset($_POST['save'])){
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">User Id</label>
+                                        <label for="name">Instructor</label>
                                         <?php 
 
-                                        $sql = "SELECT * FROM notifications";
+                                        $sql = "SELECT * FROM instructors";
                                         // runt the above query
-                                      $result = $conn->query($sql);
+                                        $result = $conn->query($sql);
 
                                        ?>
                                     <select name="user_id" class="form-control">
                                       <option>Please Select</option>
-                                     <?php while($category = $result->fetch_assoc()){ ?>
-       <option <?php echo $user_id['user_id'] == $row['user_id'] ? 'selected' : '' ?> value="<?php echo $user_id['user_id'] ?>"><?php echo $user_id['user_id'] ?></option>
+                                     <?php while($instructor = $result->fetch_assoc()){ ?>
+       <option <?php echo $instructor['instructor_id'] == $notification['user_id'] ? 'selected' : '' ?> value="<?php echo $instructor['instructor_id'] ?>"><?php echo $instructor['first_name'] ?> <?php echo $instructor['last_name'] ?></option>
                                    <?php } ?>
                                          </select>
+                                         
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Course</label>
+                                        
+                                        <?php 
+                                            $sql = "SELECT * FROM courses";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="course_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($course = $result->fetch_assoc()){ ?>
+                                                <option <?php echo $course['course_id'] == $notification['course_id'] ? 'selected' : '' ?> value="<?php echo $course['course_id'] ?>"><?php echo $course['course_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                          
                                     </div>
                                     
                                     <div class="form-group">
                                         <label for="name">Message</label>
-                                        <input type="text" value="<?php echo $row['message'] ?>" class="form-control" id="name" name="message">
+                                        <input type="text" value="<?php echo $notification['message'] ?>" class="form-control" id="name" name="message">
                                          
                                     </div>
                                     
                                     <div class="form-group">
                                         <label for="name">Date Created</label>
-                                        <input type="date" class="form-control" value="<?php echo $row['date_created'] ?>" id="phone" name="date_created">
+                                        <input type="date" class="form-control" value="<?php echo $notification['date_created'] ?>" id="phone" name="date_created">
                                          
                                     </div>
-                                    <input type="hidden" value="<?php echo $row['course_id'] ?>" name="course_id">
+                                    <input type="hidden" value="<?php echo $notification['notification_id'] ?>" name="notification_id">
                                    
                                     
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

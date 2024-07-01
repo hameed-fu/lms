@@ -7,27 +7,28 @@
 <?php
 include ('parts/connection.php');
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
-     
+
     $sql = "select * from assignments where assignment_id =  $id";
     $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+    $assignment = $result->fetch_assoc();
 
 }
 
 
-if(isset($_POST['save'])){
+if (isset($_POST['save'])) {
     $instructor_id = $_POST['instructor_id'];
     $lecture_id = $_POST['lecture_id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $due_date = $_POST['due_date'];
+    $assignment_id = $_POST['assignment_id'];
 
-    
-    $sql = "UPDATE  assignments set instructor_id = '$instructor_id',lecture_id  = '$lecture_id', title ='$tite', description = '$description',due_date = '$due_date'";
+
+    $sql = "UPDATE  assignments set instructor_id = '$instructor_id',lecture_id  = '$lecture_id', title ='$title', description = '$description',due_date = '$due_date' where assignment_id = '$assignment_id' ";
     $state = $conn->query($sql);
-    if($state){
+    if ($state) {
         //echo "record added successfully";
         header("Location: assignments.php");
     }
@@ -110,61 +111,68 @@ if(isset($_POST['save'])){
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title"> Eidt Assignment</h4>
-                            
+
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">instructor</label>
-                                        <?php 
+                                        <?php
 
-                                        $sql = "SELECT * FROM assignments";
+                                        $sql = "SELECT * FROM instructors";
                                         // runt the above query
-                                      $result = $conn->query($sql);
+                                        $result = $conn->query($sql);
 
-                                       ?>
-                                    <select name="instructor_id" class="form-control">
-                                      <option>Please Select</option>
-                                     <?php while($category = $result->fetch_assoc()){ ?>
-       <option <?php echo $instructor_id['instructor_id'] == $row['instructor_id'] ? 'selected' : '' ?> value="<?php echo $instructor_id['instructor_id'] ?>"><?php echo $instructor_id['instructor_id'] ?></option>
-                                   <?php } ?>
-                                         </select>
-                                         
+                                        ?>
+                                        <select name="instructor_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while ($instructor = $result->fetch_assoc()) { ?>
+                                                <option <?php echo $instructor['instructor_id'] == $assignment['instructor_id'] ? 'selected' : '' ?>
+                                                    value="<?php echo $instructor['instructor_id'] ?>">
+                                                    <?php echo $instructor['first_name'] ?> <?php echo $instructor['last_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">lecture</label>
-                                        <?php 
-                                        $sql = "SELECT * FROM assignments";
+                                        <label for="exampleInputPassword1">Lecture</label>
+                                        <?php
+                                        $sql = "SELECT * FROM lectures";
                                         // runt the above query
-                                      $result = $conn->query($sql);
+                                        $result = $conn->query($sql);
 
-                                       ?>
-                                    <select name="lecture_id" class="form-control">
-                                      <option>Please Select</option>
-                                     <?php while($category = $result->fetch_assoc()){ ?>
-       <option <?php echo $lecture_id['lecture_id'] == $row['lecture_id'] ? 'selected' : '' ?> value="<?php echo $lecture_id['lecture_id'] ?>"><?php echo $lecture_id['lecture_id'] ?></option>
-                                   <?php } ?>
-                                         </select>
-                                        
+                                        ?>
+                                        <select name="lecture_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while ($lecture = $result->fetch_assoc()) { ?>
+                                                <option <?php echo $lecture['lecture_id'] == $assignment['lecture_id'] ? 'selected' : '' ?> value="<?php echo $lecture['lecture_id'] ?>">
+                                                    <?php echo $lecture['title'] ?></option>
+                                            <?php } ?>
+                                        </select>
+
 
                                     </div>
-                    
-                                    
+
+
                                     <div class="form-group">
-                                        <label for="name">title</label>
-                                        <input type="text" class="form-control" value="<?php echo $row['title'] ?>" id="phone" name="phone">
-                                         
+                                        <label for="name">Title</label>  
+                                        <input type="text" class="form-control" value="<?php echo $assignment['title'] ?>"
+                                             name="title">
+
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">description</label>
-                                        <input type="text" class="form-control" value="<?php echo $row['description'] ?>" id="phone" name="phone">
-                                         
+                                        <label for="name">Description</label>
+                                        <input type="text" class="form-control"
+                                            value="<?php echo $assignment['description'] ?>"  name="description">
+
                                     </div>
                                     <div class="form-group">
-                                        <label for="name"> due date</label>
-                                        <input type="date" class="form-control" value="<?php echo $row['due_date'] ?>" id="phone" name="due_date">
-                                         
+                                        <label for="name"> Due date</label>
+                                        <input type="date" class="form-control" value="<?php echo $assignment['due_date'] ?>"
+                                             name="due_date">
+
                                     </div>
-    
-                            
+                                    <input type="hidden" name="assignment_id" value="<?=  $assignment['assignment_id'] ?>">
+
+
 
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>

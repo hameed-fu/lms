@@ -26,8 +26,8 @@ if(isset($_POST['save'])){
     $course_id = $_POST['course_id'];
 
     
-    $sql = "UPDATE  subjects set subject_id = '$subject_id', title = '$title', code ='$code', description = '$description',course_id = '$course_id'";
-PDATE  subjects set title = '$title', code ='$code', description = '$description',course_id =$course_id ";
+    $sql = "UPDATE  subjects set subject_id = '$subject_id', title = '$title', code ='$code', description = '$description',course_id = '$course_id' where subject_id = '$subject_id'";
+
 
     $state = $conn->query($sql);
     if($state){
@@ -116,11 +116,7 @@ PDATE  subjects set title = '$title', code ='$code', description = '$description
                                 <h4 class="card-title"> Eidt Subject</h4>
                             
                                 <form method="post" action="">
-                                    <div class="form-group">
-                                        <label for="name">Subject Id</label>
-                                        <input type="text" value="<?php echo $row['subject_id'] ?>" class="form-control" id="name" name="subject_id">
-                                         
-                                    </div>
+                                     
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">title</label>
                                         <input type="text" value="<?php echo $row['title'] ?>" class="form-control" id="name" name="title">
@@ -128,26 +124,42 @@ PDATE  subjects set title = '$title', code ='$code', description = '$description
                                     </div>
                     
                                     
+                                     
                                     <div class="form-group">
-                                </div>
+                                        <label for="exampleInputPassword1">Code</label>
+                                        <input type="text" value="<?php echo $row['code'] ?>" class="form-control" id="code" name="code">
+
+                                    </div>
                                     <div class="form-group">
                                         <label for="name">description</label>
                                         <input type="text" class="form-control" value="<?php echo $row['description'] ?>" id=" "name="description">
                                          
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="name"> due date</label>
-                                        <input type="date" class="form-control" value="<?php echo $row['due_date'] ?>" id="" name="date">
+                                        <label for="name">Course</label>
+                                        <?php 
+                                            $sql = "SELECT * FROM courses";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="course_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($course = $result->fetch_assoc()){ ?>
+                                                <option <?php echo $course['course_id'] ==  $row['course_id'] ? 'selected' :' '  ?> value="<?php echo $course['course_id'] ?>"><?php echo $course['course_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                          
                                     </div>
-    
-
+                                    
+                                        <input type="hidden" name="subject_id" value="<?php echo $row['subject_id'] ?>" />
 
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div>  
                 </div>
 
             </div>
