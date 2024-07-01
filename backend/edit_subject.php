@@ -18,14 +18,17 @@ if(isset($_GET['id'])){
 
 
 if(isset($_POST['save'])){
+
+    $subject_id = $_POST['subject_id'];
     $title = $_POST['title'];
-    $course_id = $_POST['course_id'];
     $code = $_POST['code'];
     $description = $_POST['description'];
-    
+    $course_id = $_POST['course_id'];
 
     
-    $sql = "UPDATE  subjects set title = '$title', code ='$code', description = '$description',course_id =$course_id ";
+    $sql = "UPDATE  subjects set subject_id = '$subject_id', title = '$title', code ='$code', description = '$description',course_id = '$course_id'";
+PDATE  subjects set title = '$title', code ='$code', description = '$description',course_id =$course_id ";
+
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -109,30 +112,36 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"> Edit Subjects</h4>
+
+                                <h4 class="card-title"> Eidt Subject</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">Title</label>
-                                        <input type="text" value="<?php echo $row['title'] ?>" class="form-control" id="name" name="title">
+                                        <label for="name">Subject Id</label>
+                                        <input type="text" value="<?php echo $row['subject_id'] ?>" class="form-control" id="name" name="subject_id">
                                          
                                     </div>
-                                   
-                                   
                                     <div class="form-group">
-                                        <label for="name">Code</label>
-                                        <input type="text" value="<?php echo $row['code'] ?>" class="form-control" id="name" name="code">
-                                         
+                                        <label for="exampleInputPassword1">title</label>
+                                        <input type="text" value="<?php echo $row['title'] ?>" class="form-control" id="name" name="title">
+
                                     </div>
-                                   
+                    
                                     
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="description" class="form-control"  id=""><?php echo $row['description'] ?></textarea>
+                                </div>
+                                    <div class="form-group">
+                                        <label for="name">description</label>
+                                        <input type="text" class="form-control" value="<?php echo $row['description'] ?>" id=" "name="description">
+                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name"> due date</label>
+                                        <input type="date" class="form-control" value="<?php echo $row['due_date'] ?>" id="" name="date">
+                                         
                                     </div>
     
-                                    <input type="hidden" name="course_id" value="<?php echo $lecture['course_id'] ?>">
-                    
+
 
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>

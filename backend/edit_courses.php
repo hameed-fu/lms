@@ -24,8 +24,9 @@ if(isset($_POST['save'])){
     $number_of_students = $_POST['number_of_students']; 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $course_id = $_POST['course_id'];
     
-    $sql = "UPDATE  courses set course_name = '$course_name', course_description = '$course_description', category_id ='$category_id', number_of_students = '$number_of_students',start_date =  '$start_date',end_date = '$end_date' ";
+    $sql = "UPDATE  courses set course_name = '$course_name', course_description = '$course_description', category_id ='$category_id', number_of_students = '$number_of_students',start_date =  '$start_date',end_date = '$end_date' where course_id = '$course_id'";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -115,17 +116,36 @@ if(isset($_POST['save'])){
                                     <div class="form-group">
                                         <label for="name">Course Name</label>
                                         <input type="text" value="<?php echo $row['course_name'] ?>" class="form-control" id="name" name="course_name">
+                                     
+                                         
+                                    
                                          
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Course Description</label>
                                         <input type="text" value="<?php echo $row['course_description'] ?>" class="form-control" id="name" name="course_description">
 
+
+
+
+                                        
+
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Category id</label>
-                                        <input type="text" value="<?php echo $row['category_id'] ?>" class="form-control" id="name" name="category_id">
-                                         
+                                        <label for="exampleInputPassword1">Category</label>
+                                        <?php 
+
+                                            $sql = "SELECT * FROM categories";
+                                            // runt the above query
+                                            $result = $conn->query($sql);
+
+                                        ?>
+                                        <select name="category_id" class="form-control">
+                                            <option>Please Select</option>
+                                            <?php while($category = $result->fetch_assoc()){ ?>
+                                                <option <?php echo $category['category_id'] == $row['category_id'] ? 'selected' : '' ?> value="<?php echo $category['category_id'] ?>"><?php echo $category['category_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                     
                                     <div class="form-group">
