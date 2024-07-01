@@ -109,17 +109,41 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"> Eidt Student</h4>
+                                <h4 class="card-title"> Eidt Assignment</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">instructor</label>
-                                        <input type="text" value="<?php echo $row['instructor_id'] ?>" class="form-control" id="name" name="instructor_id">
+                                        <?php 
+
+                                        $sql = "SELECT * FROM assignments";
+                                        // runt the above query
+                                      $result = $conn->query($sql);
+
+                                       ?>
+                                    <select name="instructor_id" class="form-control">
+                                      <option>Please Select</option>
+                                     <?php while($category = $result->fetch_assoc()){ ?>
+       <option <?php echo $instructor_id['instructor_id'] == $row['instructor_id'] ? 'selected' : '' ?> value="<?php echo $instructor_id['instructor_id'] ?>"><?php echo $instructor_id['instructor_id'] ?></option>
+                                   <?php } ?>
+                                         </select>
                                          
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">lecture</label>
-                                        <input type="text" value="<?php echo $row['lecture_id'] ?>" class="form-control" id="name" name="lecture_id">
+                                        <?php 
+                                        $sql = "SELECT * FROM assignments";
+                                        // runt the above query
+                                      $result = $conn->query($sql);
+
+                                       ?>
+                                    <select name="lecture_id" class="form-control">
+                                      <option>Please Select</option>
+                                     <?php while($category = $result->fetch_assoc()){ ?>
+       <option <?php echo $lecture_id['lecture_id'] == $row['lecture_id'] ? 'selected' : '' ?> value="<?php echo $lecture_id['lecture_id'] ?>"><?php echo $lecture_id['lecture_id'] ?></option>
+                                   <?php } ?>
+                                         </select>
+                                        
 
                                     </div>
                     

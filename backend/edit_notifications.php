@@ -108,12 +108,24 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Update Instructor</h4>
+                                <h4 class="card-title">Edit Notifications</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">User Id</label>
-                                        <input type="text" value="<?php echo $row['user_id'] ?>" class="form-control" id="name" name="user_id">
+                                        <?php 
+
+                                        $sql = "SELECT * FROM notifications";
+                                        // runt the above query
+                                      $result = $conn->query($sql);
+
+                                       ?>
+                                    <select name="user_id" class="form-control">
+                                      <option>Please Select</option>
+                                     <?php while($category = $result->fetch_assoc()){ ?>
+       <option <?php echo $user_id['user_id'] == $row['user_id'] ? 'selected' : '' ?> value="<?php echo $user_id['user_id'] ?>"><?php echo $user_id['user_id'] ?></option>
+                                   <?php } ?>
+                                         </select>
                                          
                                     </div>
                                     
