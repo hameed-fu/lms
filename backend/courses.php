@@ -33,7 +33,6 @@ $sql = "SELECT courses.*, categories.category_name from courses
 join categories on courses.category_id = categories.category_id
 ";
 
-
 // runt the above query
 $result = $conn->query($sql);
 
@@ -123,15 +122,14 @@ $result = $conn->query($sql);
                                         <tr>
                                             <td><?php echo  $row['course_id'] ?></td>
                                             <td><?php echo $row['course_name'] ?></td>
-                                            <td><?php echo $row['course_description'] ?></td>
-                                            <td><?php echo $row['category_name'] ?></td>
                                             <td><?php echo $row['number_of_students'] ?></td>
+                                            <td><?php echo $row['category_name'] ?></td>
                                             <td><?php echo $row['start_date'] ?></td>
                                             <td><?php echo $row['end_date'] ?></td>
+                                            <td><?php echo $row['course_description'] ?></td>
                                             <td>
                                                 <a href="edit_courses.php?id=<?php echo $row['course_id'] ?>" class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_course.php?id=<?php echo $row['course_id'] ?>" class="btn btn-danger text-white">Delete</a>
-                                                
+                                                <a onclick="return confirm('are you sure?')" href="delete_course.php?id=<?php echo $row['course_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                             </td>
                                             
 

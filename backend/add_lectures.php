@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 session_start();
 
-if(!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
 }
 
@@ -11,27 +11,40 @@ if(!isset($_SESSION['user_id'])){
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 
 <?php
-include ('parts/connection.php');
+include('parts/connection.php');
 
-if(isset($_POST['save'])){
+if (isset($_POST['save'])) {
     $instructor_id = $_POST['instructor_id'];
     $tittle = $_POST['tittle'];
     $subject_id = $_POST['subject_id'];
     $description = $_POST['description'];
-    $content_URL = $_POST['content_URL'];
     $creation_date = date('Y-m-d H:i:s');
     $last_updated = date('Y-m-d H:i:s');
-    
 
+    $content_URL = '';
+    if (isset($_FILES['content_URL']) && $_FILES['content_URL']['error'] == UPLOAD_ERR_OK) {
+        $fileTmpPath = $_FILES['content_URL']['tmp_name'];
+        $fileName = $_FILES['content_URL']['name'];
+        $dest_path = 'lectures/' . $fileName;
 
-    
-    $sql = "INSERT INTO lectures(instructor_id,title,subject_id,description,content_URL,creation_date) values('  $instructor_id',' $tittle',' $subject_id','$description','$content_URL','$creation_date')";
+        if (move_uploaded_file($fileTmpPath, $dest_path)) {
+            $content_URL = $dest_path;
+        } else {
+            echo "There was an error moving the uploaded file.";
+            exit;
+        }
+    } elseif (isset($_POST['content_URL'])) {
+        $content_URL = $_POST['content_URL'];
+    }
+
+    $sql = "INSERT INTO lectures (instructor_id, title, subject_id, description, content_URL, creation_date) 
+        VALUES ('$instructor_id', '$tittle', '$subject_id', '$description', '$content_URL', '$creation_date')";
     $state = $conn->query($sql);
-    if($state){
+    if ($state) {
         //echo "record added successfully";
         header("Location: lectures.php");
     }
@@ -84,8 +97,8 @@ if(isset($_POST['save'])){
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -94,7 +107,7 @@ if(isset($_POST['save'])){
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -113,68 +126,62 @@ if(isset($_POST['save'])){
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title"></h4>
-                            
-                                <form method="post" action="">
-                                    <div class="form-group">
-                                        <label for="name">Lectures</label>
-                                        <?php 
 
-                                            $sql = "SELECT * FROM instructors";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
+                                <form method="post" action="" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="name">Lecturer</label>
+                                        <?php
+
+                                        $sql = "SELECT * FROM instructors";
+                                        // runt the above query
+                                        $result = $conn->query($sql);
 
                                         ?>
                                         <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                            <?php while ($row = $result->fetch_assoc()) { ?>
                                                 <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
-                                         
                                     </div>
-                                         
-                                     
-                                   
                                     <div class="form-group">
                                         <label for="name">Title</label>
                                         <input type="text" class="form-control" id="name" name="tittle">
-                                         
+
                                     </div>
-                                    
-
                                     <div class="form-group">
-                                        <label for="name">Subject</label>
-                                        <?php 
-
-                                            $sql = "SELECT * FROM subjects";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
-
+                                        <label for="name">Courses</label>
+                                        <?php
+                                        $sql = "SELECT * FROM courses";
+                                        $result = $conn->query($sql);
                                         ?>
-                                        <select name="subject_id" class="form-control">
+                                        <select name="" id="course" onchange="getSubjects()" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?> - <?php echo $row['code'] ?></option>
+                                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                                <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
                                             <?php } ?>
                                         </select>
-                                         
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Subjects</label>
+                                        <select id="subjects" name="subject_id" class="form-control">
+                                            <option>Please Select Course</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="description" class="form-control"  id=""></textarea>
+                                        <textarea name="description" class="form-control" id=""></textarea>
                                     </div>
                                     <div class="form-group">
-                                    <input type="radio" name="type" value="url" class="Lecture" checked> URL
-                                    <input type="radio" name="type" value="file" class="Lecture"> File
+                                        <input type="radio" name="type" value="url" class="Lecture" checked> URL
+                                        <input type="radio" name="type" value="file" class="Lecture"> File
                                     </div>
                                     <div class="form-group">
                                         <label for="name"> Content URL</label>
                                         <input type="text" class="form-control" id="urlInput" name="content_URL">
                                         <input type="file" class="form-control" id="fileInput" name="content_URL" style="display:none">
-                                        
                                     </div>
-                    
-                                    
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -201,28 +208,68 @@ if(isset($_POST['save'])){
     <!--**********************************
         Main wrapper endd
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
 
 
     <script>
-        $(function(){
-             
+        $(function() {
+
             $(".Lecture").change(function() {
                 let type = $(this).val();
-                if(type == "file"){
+                if (type == "file") {
                     $("#fileInput").show()
                     $("#urlInput").hide()
-                }else{
+                } else {
                     $("#fileInput").hide()
                     $("#urlInput").show()
                 }
             });
         })
+
+        function getSubjects() {
+            var courseId = $("#course").val();
+
+            $('#subjects').empty().append('<option>Please Select</option>');
+
+            if (courseId) {
+                $.ajax({
+                    url: 'ajax/subjects.php',
+                    type: 'POST',
+                    data: {
+                        course_id: courseId
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, subject) {
+                            $('#subjects').append('<option value="' + subject.id + '">' + subject.title + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching subjects:', error);
+                    }
+                });
+            }
+        }
     </script>
+
 </body>
 
 </html>
+
+<?php
+
+
+// // Execute the query
+// if ($conn->query($sql) === TRUE) {
+//     echo "New lecture created successfully.";
+// } else {
+//     echo "Error: " . $sql . "<br>" . $conn->error;
+// }
+
+// // Close the database connection
+// $conn->close();
+// 
+?>

@@ -98,7 +98,7 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_lectures.php" class="btn btn-primary mb-1">Add New lectures</a>
+                        <a href="add_lectures.php" class="btn btn-primary mb-1">Add new lecture</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title"></h4>
@@ -121,7 +121,15 @@ $result = $conn->query($sql);
                                             <td><?php echo $row['title'] ?></td>
                                             <td><?php echo $row['subjectTitle'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
-                                            <td><?php echo $row['content_URL'] ?></td>
+                                            <?php 
+                                            $content_URL = filter_var($row['content_URL'], FILTER_VALIDATE_URL) !== false; 
+                                            if($content_URL) {
+                                                echo '<td><a class="badge bg-secondary text-white" href="'. $row['content_URL'] .'" target="_blank">View Lecture</a></td>';
+                                            } else {
+                                                echo '<td><a class="badge bg-secondary text-white" href="'. $row['content_URL'] .'" target="_blank">Download Lecture</a></td>';
+                                            }
+                                            ?>
+                                            
                                             <td><?php echo $row['creation_date'] ?></td>
                                              <td>
                                                 <a href="edit_lectures.php?id=<?php echo $row['lecture_id'] ?> " class="btn btn-warning text-white">Edit</a>
@@ -130,9 +138,7 @@ $result = $conn->query($sql);
                                             </td>
                                         </tr>
 
-                                    <?php } ?>
-
-                                    
+                                    <?php } ?>                                    
                                  </table>
                             </div>
                         </div>
@@ -142,18 +148,6 @@ $result = $conn->query($sql);
             </div>
             <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-
-        <!--**********************************
-            Footer end
-        ***********************************-->
     </div>
     <!--**********************************
         Main wrapper end

@@ -127,7 +127,7 @@ $result = $conn->query($sql);
                                              <td>
                                                 <a href="edit_subject.php?id=<?php echo $row['subject_id'] ?>"class="btn btn-warning text-white">Edit</a>
 
-                                                <a href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a>
+                                                <a onclick="return confirm('are you sure?')" href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
                                    </tr>

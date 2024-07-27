@@ -20,12 +20,12 @@ include ('parts/connection.php');
 if(isset($_POST['save'])){
     $title = $_POST['title'];
     $code = $_POST['code'];
-    $descriptions = $_POST['description'];
+    $description = $_POST['description'];
     $course_id = $_POST['course_id'];
 
 
     
-    $sql = "INSERT INTO subjects(title, code,description,course_id) values('$title','$code', '$description','$course_id')";
+    $sql = "INSERT INTO subjects(title, code, description,course_id) values('$title','$code', '$description','$course_id')";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -118,7 +118,7 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Code</label>
-                                        <input type="text" class="form-control" id="name" name="code">
+                                        <input type="number" class="form-control" id="name" name="code">
                                          
                                     </div>
 

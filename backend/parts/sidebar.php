@@ -17,7 +17,7 @@
                     <li><a href="categories.php">Categories</a></li>
                     <li><a href="certifications.php">Certificates</a></li>
                     <li><a href="lectures.php">Lectures</a></li>
-                    <li><a href="comments.php">comments</a></li>
+                    <li><a href="comments.php">Comments</a></li>
                     
                     
                 </ul>

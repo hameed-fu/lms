@@ -110,7 +110,7 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">edit courses</h4>
+                                <h4 class="card-title">Edit Course</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
@@ -150,7 +150,7 @@ if(isset($_POST['save'])){
                                     
                                     <div class="form-group">
                                         <label for="name">Number of student</label>
-                                        <input type="text" class="form-control" value="<?php echo $row['number_of_students'] ?>" id="phone" name="number_of_students">
+                                        <input type="number" class="form-control" value="<?php echo $row['number_of_students'] ?>" id="phone" name="number_of_students">
                                          
                                     </div>
                                     <div class="form-group">

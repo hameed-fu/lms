@@ -110,7 +110,7 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">  Edit students</h4>
+                                <h4 class="card-title">Add new student</h4>
                                 <form method="post" action="">
                                     <div class="form-group">
                                         <label for="name">FirstName</label>
