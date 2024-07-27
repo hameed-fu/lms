@@ -101,8 +101,7 @@ $result = $conn->query($sql);
                                 <h4 class="card-title">Categories</h4>
                                  <table class="table table-hover table-striped">
                                     <tr>
-                                        <th>1</th>
-                                        <th>Category Id</th>
+                                        <th>#</th>
                                         <th>Category Name</th>
                                         <th>Description</th>
                                         <th>Action</th>
@@ -114,12 +113,11 @@ $result = $conn->query($sql);
                                             <td><?php echo  $row['category_id'] ?></td>
                                             <td><?php echo $row['category_name'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
-                                            <td></td>
                                             <td>
 
 
                                                 <a href="edit_category.php?id=<?php echo $row['category_id'] ?>"class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_category.php?id=<?php echo $row['category_id'] ?>" class="btn btn-danger text-white">Delete</a>
+                                                <a onclick="return confirm('are you sure?')" href="delete_category.php?id=<?php echo $row['category_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                                 
                                             </td>
                                         </tr>

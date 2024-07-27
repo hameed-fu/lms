@@ -18,12 +18,12 @@ if(isset($_GET['id'])){
 
 
 if(isset($_POST['save'])){
-    $category_id = $_POST['cegory_id'];
+    $category_id = $_POST['category_id'];
     $category_name = $_POST['category_name'];
     $description = $_POST['description'];
     
     
-    $sql = "UPDATE  categories set category_id = '$category_id', category_name = '$category_name', description ='$description' where category_id = $categoryr_id";
+    $sql = "UPDATE  categories set category_id = '$category_id', category_name = '$category_name', description ='$description' where category_id = $category_id";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -107,7 +107,7 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Update Instructor</h4>
+                                <h4 class="card-title">Update Category</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
@@ -121,7 +121,7 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Description</label>
-                                        <input type="text"class="form-control" id="name" name="email">
+                                        <input name="description" type="text" value="<?php echo $row['description'] ?>" class="form-control" id="name" name="email">
                                          
                                     </div>
                                     

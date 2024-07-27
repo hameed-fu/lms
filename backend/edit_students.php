@@ -25,7 +25,7 @@ if(isset($_POST['save'])){
     $phone = $_POST['phone'];
 
     
-    $sql = "UPDATE  students set first_name = '$first_name', last_name = '$last_name', email ='$email', phone = '$phone'";
+    $sql = "UPDATE  students set first_name = '$first_name', last_name = '$last_name', email ='$email', phone = '$phone' WHERE student_id = '$id'";
     $state = $conn->query($sql);
     if($state){
         //echo "record added successfully";
@@ -109,7 +109,7 @@ if(isset($_POST['save'])){
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"> Eidt Student</h4>
+                                <h4 class="card-title">Edit Student</h4>
                             
                                 <form method="post" action="">
                                     <div class="form-group">
@@ -124,7 +124,7 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Email</label>
-                                        <input type="text" value="<?php echo $row['email'] ?>" class="form-control" id="name" name="email">
+                                        <input type="email" value="<?php echo $row['email'] ?>" class="form-control" id="name" name="email">
                                          
                                     </div>
                                     

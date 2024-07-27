@@ -117,16 +117,16 @@ if(isset($_POST['save'])){
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Last Name</label>
-                                        <textarea name="last_name" class="form-control"  id=""></textarea>
+                                        <input type="text" class="form-control" id="name" name="last_name">
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Email</label>
-                                        <input type="text" class="form-control" id="name" name="email">
+                                        <input type="email" class="form-control" id="name" name="email">
                                          
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Password</label>
-                                        <input type="text" class="form-control" id="name" name="password">
+                                        <input type="password" class="form-control" id="name" name="password">
                                          
                                     </div>
                                     <div class="form-group">
