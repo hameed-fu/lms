@@ -1,32 +1,28 @@
-<!DOCTYPE html>
-<html class="h-100" lang="en">
-
-
-<?php
+<?php 
 session_start();
-include ('parts/connection.php');
-
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-
-    $sql = "SELECT * from users WHERE email = '$email' AND password = '$password'";
-    $state = $conn->query($sql);
-    if ($state->num_rows == 1) {
-
-        $user = $state->fetch_assoc();
-        session_start();
-
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['first_name'] = $user['first_name'];
-        header("Location: index.php");
+include 'parts/connection.php';
+if (isset($_SESSION['email']) && isset($_SESSION['role'])) {
+    $role = $_SESSION['role'];
+    
+    switch ($role) {
+        case 'admin':
+            header("Location: $base_url/admin");
+            exit();
+        case 'student':
+            header("Location: $base_url/student");
+            exit();
+        case 'instructor':
+            header("Location: $base_url/instructor");
+            exit();
+        default:
+            header("Location: $main_url/login.php");
+            exit();
     }
 }
-
 ?>
 
+<!DOCTYPE html>
+<html class="h-100" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +31,7 @@ if (isset($_POST['submit'])) {
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="admin/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -75,8 +71,7 @@ if (isset($_POST['submit'])) {
                                         <input type="email" name="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control"
-                                            placeholder="Password">
+                                        <input type="password" name="password" class="form-control" placeholder="Password">
                                     </div>
                                     <button type="submit" name="submit" class="btn login-form__btn submit w-100">Sign
                                         In</button>
@@ -95,11 +90,66 @@ if (isset($_POST['submit'])) {
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="admin/plugins/common/common.min.js"></script>
+    <script src="admin/js/custom.min.js"></script>
+    <script src="admin/js/settings.js"></script>
+    <script src="admin/js/gleek.js"></script>
+    <script src="admin/js/styleSwitcher.js"></script>
 </body>
 
 </html>
+
+
+
+<?php
+
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $user_tables = [
+        'admin' => 'users',
+        'student' => 'students',
+        'instructor' => 'instructors',
+    ];
+
+    $role = null;
+
+    foreach ($user_tables as $role => $table) {
+        $sql = "SELECT id, email, password FROM $table WHERE email = '$email'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if ($password === $row['password']) {
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['role'] = $role;
+
+                switch ($role) {
+                    case 'admin':
+                        header("Location: $base_url/admin");
+                        break;
+                    case 'student':
+                        header("Location: $base_url/student");
+                        break;
+                    case 'instructor':
+                        header("Location: $base_url/instructor");
+                        break;
+                    default:
+                        echo "Invalid role";
+                        break;
+                }
+                exit();
+            } else {
+                echo "Invalid email or password";
+            }
+        }
+    }
+
+    echo "Invalid email or password";
+
+    $conn->close();
+}
+
+?>
