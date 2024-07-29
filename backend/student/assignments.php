@@ -1,30 +1,15 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+<?php
+include 'session_check.php';
+check_user_role("student");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 
 <?php
-include ('parts/connection.php');
-
-// select data from categories table
-$sql = "SELECT assignments.*, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName, lectures.title as LectureTitle FROM assignments
-join instructors on instructors.instructor_id = assignments.instructor_id
-join lectures on lectures.lecture_id = assignments.lecture_id
-";
-
-// runt the above query
-$result = $conn->query($sql);
+include('parts/connection.php');
 
 ?>
 
@@ -73,8 +58,8 @@ $result = $conn->query($sql);
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -83,7 +68,7 @@ $result = $conn->query($sql);
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -98,7 +83,6 @@ $result = $conn->query($sql);
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_assignment.php" class="btn btn-primary mb-1">Add Assigment</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Assignments</h4>
@@ -106,32 +90,33 @@ $result = $conn->query($sql);
                                     <tr>
                                         <th>Instructor</th>
                                         <th>Lecture</th>
-                                        <th>Title</th>
                                         <th>Description</th>
                                         <th>Due Date</th>
                                         <th>Assignments</th>
-                                        <th>Action</th>
                                     </tr>
-                                    <?php while ($row = $result->fetch_assoc()) { ?>
+                                    <?php
+                                    $id = $_GET['id'];
+                                    $sql = "SELECT assignments.*, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName, lectures.title as LectureTitle 
+                                    FROM assignments
+                                    join instructors on instructors.id = assignments.instructor_id
+                                    join lectures on lectures.lecture_id = assignments.lecture_id
+                                    WHERE assignments.lecture_id = '$id'";
+                                    // runt the above query
+                                    $result = $conn->query($sql);
+                                    
+                                    while ($row = $result->fetch_assoc()) { 
+                                    ?>
 
                                         <tr>
                                             <td><?php echo $row['InstructorFirstName'] ?>
                                                 <?php echo $row['InstructorLastName'] ?></td>
-                                            <td><?php echo $row['LectureTitle'] ?></td>
                                             <td><?php echo $row['title'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
                                             <td><?php echo $row['due_date'] ?></td>
 
 
                                             <td>
-                                                <a class="btn btn-primary text-white">View</a>
-                                            </td>
-
-                                            <td>
-                                                <a href="edit_assignment.php?id=<?php echo $row['assignment_id'] ?>"   class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_assignment.php?id=<?php echo $row['assignment_id'] ?>"
-                                                    class="btn btn-danger text-white">Delete</a>
-
+                                                <?php include 'models/view_assignment.php.php'; ?>
                                             </td>
                                         </tr>
 
@@ -163,11 +148,11 @@ $result = $conn->query($sql);
     <!--**********************************
         Main wrapper end
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
 
 </body>
 

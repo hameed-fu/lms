@@ -96,7 +96,6 @@ include('parts/head.php');
                                         <th>Action</th>
                                     </tr>
                                     <?php
-
                                     $id = $_GET['id'];
 
                                     $sql = "SELECT lectures.*, instructors.first_name as instructorFirstName, instructors.last_name as instructorLastName FROM lectures
@@ -122,8 +121,8 @@ include('parts/head.php');
 
                                             <td><?php echo $row['creation_date'] ?></td>
                                             <td>
-                                                <a href="#" class="btn btn-warning text-white">Assignments</a>
-                                                <a href="#" class="btn btn-danger text-white">Comments</a>
+                                                <a href="assignments.php?id=<?php echo $row['lecture_id'] ?>" class="btn btn-warning text-white">Assignments</a>
+                                                <?php include 'models/comments.php'; ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -149,3 +148,13 @@ include('parts/head.php');
 </body>
 
 </html>
+
+<?php 
+if(isset($_POST['add_comment'])){
+    $comments = $_POST['comments'];
+    $lecture_id = $_POST['lecture_id'];
+    $user_id = $_SESSION['id'];
+    $sql = "INSERT INTO comments (user_id, lecture_id, comments) VALUES ('$user_id', '$lecture_id', '$comments')";
+    $state = $conn->query($sql);
+}
+?>
