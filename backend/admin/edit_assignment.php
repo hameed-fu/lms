@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 
 <?php
-include ('parts/connection.php');
+include('parts/connection.php');
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -13,7 +13,6 @@ if (isset($_GET['id'])) {
     $sql = "select * from assignments where assignment_id =  $id";
     $result = $conn->query($sql);
     $assignment = $result->fetch_assoc();
-
 }
 
 
@@ -82,8 +81,8 @@ if (isset($_POST['save'])) {
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -92,7 +91,7 @@ if (isset($_POST['save'])) {
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -113,67 +112,52 @@ if (isset($_POST['save'])) {
                                 <h4 class="card-title"> Eidt Assignment</h4>
 
                                 <form method="post" action="">
+
                                     <div class="form-group">
-                                        <label for="name">instructor</label>
+                                        <label for="name">Instructor</label>
                                         <?php
-
                                         $sql = "SELECT * FROM instructors";
-                                        // runt the above query
                                         $result = $conn->query($sql);
-
                                         ?>
                                         <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while ($instructor = $result->fetch_assoc()) { ?>
-                                                <option <?php echo $instructor['instructor_id'] == $assignment['instructor_id'] ? 'selected' : '' ?>
-                                                    value="<?php echo $instructor['instructor_id'] ?>">
-                                                    <?php echo $instructor['first_name'] ?> <?php echo $instructor['last_name'] ?></option>
+                                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
-
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Lecture</label>
+                                        <label for="name">Subjects</label>
                                         <?php
-                                        $sql = "SELECT * FROM lectures";
-                                        // runt the above query
+                                        $sql = "SELECT * FROM subjects";
                                         $result = $conn->query($sql);
-
                                         ?>
-                                        <select name="lecture_id" class="form-control">
+                                        <select name="" id="subject" onchange="getLectures()" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while ($lecture = $result->fetch_assoc()) { ?>
-                                                <option <?php echo $lecture['lecture_id'] == $assignment['lecture_id'] ? 'selected' : '' ?> value="<?php echo $lecture['lecture_id'] ?>">
-                                                    <?php echo $lecture['title'] ?></option>
+                                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                                <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?></option>
                                             <?php } ?>
                                         </select>
-
-
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="name">Title</label>  
-                                        <input type="text" class="form-control" value="<?php echo $assignment['title'] ?>"
-                                             name="title">
-
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Description</label>
-                                        <input type="text" class="form-control"
-                                            value="<?php echo $assignment['description'] ?>"  name="description">
-
+                                        <label for="lecture">Lectures</label>
+                                        <select name="lecture_id" id="lectures" class="form-control">
+                                            <option>Please Select Subject</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name"> Due date</label>
-                                        <input type="date" class="form-control" value="<?php echo $assignment['due_date'] ?>"
-                                             name="due_date">
+                                        <label for="name">Title</label>
+                                        <input type="text" class="form-control" id="name" name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Description</label>
+                                        <textarea name="description" class="form-control" id=""></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name"> Submission Date</label>
+                                        <input type="date" class="form-control" id="name" name="due_date">
 
                                     </div>
-                                    <input type="hidden" name="assignment_id" value="<?=  $assignment['assignment_id'] ?>">
-
-
-
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -200,12 +184,36 @@ if (isset($_POST['save'])) {
     <!--**********************************
         Main wrapper endd
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
+    <script>
+        function getLectures() {
+            var subjectId = $("#subject").val();
 
+            $('#lectures').empty().append('<option>Please Select</option>');
+
+            if (subjectId) {
+                $.ajax({
+                    url: 'ajax/lectures.php',
+                    type: 'POST',
+                    data: {
+                        subject_id: subjectId
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, lecture) {
+                            $('#lectures').append('<option value="' + lecture.id + '">' + lecture.title + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching subjects:', error);
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

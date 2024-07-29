@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'session_check.php';
 check_user_role("admin");
 ?>
@@ -6,7 +6,7 @@ check_user_role("admin");
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 <body>
 
@@ -33,7 +33,7 @@ check_user_role("admin");
         <!--**********************************
             Nav header start
         ***********************************-->
-        
+
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -43,8 +43,8 @@ check_user_role("admin");
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -53,7 +53,7 @@ check_user_role("admin");
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -137,8 +137,7 @@ check_user_role("admin");
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><img src="./images/avatar/1.jpg" class=" rounded-circle mr-3"
-                                                            alt="">Sarah Smith</td>
+                                                    <td><img src="./images/avatar/1.jpg" class=" rounded-circle mr-3" alt="">Sarah Smith</td>
                                                     <td>iPhone X</td>
                                                     <td>
                                                         <span>United States</span>
@@ -158,8 +157,7 @@ check_user_role("admin");
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><img src="./images/avatar/2.jpg" class=" rounded-circle mr-3"
-                                                            alt="">Walter R.</td>
+                                                    <td><img src="./images/avatar/2.jpg" class=" rounded-circle mr-3" alt="">Walter R.</td>
                                                     <td>Pixel 2</td>
                                                     <td><span>Canada</span></td>
                                                     <td>
@@ -177,8 +175,7 @@ check_user_role("admin");
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><img src="./images/avatar/3.jpg" class=" rounded-circle mr-3"
-                                                            alt="">Andrew D.</td>
+                                                    <td><img src="./images/avatar/3.jpg" class=" rounded-circle mr-3" alt="">Andrew D.</td>
                                                     <td>OnePlus</td>
                                                     <td><span>Germany</span></td>
                                                     <td>
@@ -196,8 +193,7 @@ check_user_role("admin");
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><img src="./images/avatar/6.jpg" class=" rounded-circle mr-3"
-                                                            alt=""> Megan S.</td>
+                                                    <td><img src="./images/avatar/6.jpg" class=" rounded-circle mr-3" alt=""> Megan S.</td>
                                                     <td>Galaxy</td>
                                                     <td><span>Japan</span></td>
                                                     <td>
@@ -215,8 +211,7 @@ check_user_role("admin");
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><img src="./images/avatar/4.jpg" class=" rounded-circle mr-3"
-                                                            alt=""> Doris R.</td>
+                                                    <td><img src="./images/avatar/4.jpg" class=" rounded-circle mr-3" alt=""> Doris R.</td>
                                                     <td>Moto Z2</td>
                                                     <td><span>England</span></td>
                                                     <td>
@@ -234,8 +229,7 @@ check_user_role("admin");
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><img src="./images/avatar/5.jpg" class=" rounded-circle mr-3"
-                                                            alt="">Elizabeth W.</td>
+                                                    <td><img src="./images/avatar/5.jpg" class=" rounded-circle mr-3" alt="">Elizabeth W.</td>
                                                     <td>Notebook Asus</td>
                                                     <td><span>China</span></td>
                                                     <td>
@@ -260,7 +254,7 @@ check_user_role("admin");
                         </div>
                     </div>
                 </div>
- 
+
             </div>
             <!-- #/ container -->
         </div>
@@ -280,11 +274,11 @@ check_user_role("admin");
     <!--**********************************
         Main wrapper end
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
 
 </body>
 
