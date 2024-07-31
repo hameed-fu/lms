@@ -1,32 +1,27 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+<?php
+include 'session_check.php';
+check_user_role("admin");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 
 <?php
-include ('parts/connection.php');
+include('parts/connection.php');
 
-if(isset($_POST['save'])){
+if (isset($_POST['save'])) {
     $user_id = $_POST['instructor_id'];
     $message = $_POST['message'];
-    $course_id = $_POST['course_id'];
+    $subject_id = $_POST['subject_id'];
     $date_created = date('Y-m-d');
-   
-    
-    $sql = "INSERT INTO notifications(user_id,course_id,message,date_created) values('$user_id', '$course_id','$message','$date_created')";
+
+
+    $sql = "INSERT INTO notifications(user_id,subject_id,message,date_created) values('$user_id', '$subject_id','$message','$date_created')";
     $state = $conn->query($sql);
-    if($state){
+    if ($state) {
         //echo "record added successfully";
         header("Location: notifications.php");
     }
@@ -79,8 +74,8 @@ if(isset($_POST['save'])){
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -89,7 +84,7 @@ if(isset($_POST['save'])){
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -108,51 +103,55 @@ if(isset($_POST['save'])){
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title"></h4>
-                            
+
                                 <form method="post" action="">
                                     <div class="form-group">
-                                        <label for="name">User</label>
-                                        
-                                        <?php 
-                                            $sql = "SELECT * FROM instructors";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
+                                        <label for="name">Instructor</label>
+
+                                        <?php
+                                        $sql = "SELECT * FROM instructors";
+                                        // runt the above query
+                                        $result = $conn->query($sql);
 
                                         ?>
-                                         <select name="instructor_id" class="form-control">
+                                        <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
-                                                <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
+                                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
-                                       
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Course</label>
-                                        
-                                        <?php 
-                                            $sql = "SELECT * FROM courses";
-                                            // runt the above query
-                                            $result = $conn->query($sql);
 
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Courses</label>
+                                        <?php
+                                        $sql = "SELECT * FROM courses";
+                                        $result = $conn->query($sql);
                                         ?>
-                                        <select name="course_id" class="form-control">
+                                        <select name="" id="course" onchange="getSubjects()" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                            <?php while ($row = $result->fetch_assoc()) { ?>
                                                 <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
                                             <?php } ?>
                                         </select>
-                                         
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Subjects</label>
+                                        <select id="subjects" name="subject_id" class="form-control">
+                                            <option>Please Select Course</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Message</label>
                                         <textarea type="text" class="form-control" id="name" name="message"></textarea>
-                                         
+
                                     </div>
-                                     
-                                     
-                                   
-                                    
+
+
+
+
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -179,12 +178,36 @@ if(isset($_POST['save'])){
     <!--**********************************
         Main wrapper endd
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
+    <script>
+        function getSubjects() {
+            var courseId = $("#course").val();
 
+            $('#subjects').empty().append('<option>Please Select</option>');
+
+            if (courseId) {
+                $.ajax({
+                    url: 'ajax/subjects.php',
+                    type: 'POST',
+                    data: {
+                        course_id: courseId
+                    },
+                    success: function(data) {
+                        $.each(data, function(index, subject) {
+                            $('#subjects').append('<option value="' + subject.id + '">' + subject.title + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching subjects:', error);
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

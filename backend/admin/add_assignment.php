@@ -109,7 +109,6 @@ if (isset($_POST['save'])) {
                                 <h4 class="card-title"></h4>
 
                                 <form method="post" action="">
-
                                     <div class="form-group">
                                         <label for="name">Instructor</label>
                                         <?php
@@ -152,7 +151,7 @@ if (isset($_POST['save'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="name"> Submission Date</label>
-                                        <input type="date" class="form-control" id="name" name="due_date">
+                                        <input min="<?php echo date('Y-m-d') ?>" value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="name" name="due_date">
 
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

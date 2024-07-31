@@ -92,7 +92,7 @@ include('parts/connection.php');
                                         <th>Lecture</th>
                                         <th>Description</th>
                                         <th>Due Date</th>
-                                        <th>Assignments</th>
+                                        <th>Assignment</th>
                                     </tr>
                                     <?php
                                     $id = $_GET['id'];
@@ -103,8 +103,8 @@ include('parts/connection.php');
                                     WHERE assignments.lecture_id = '$id'";
                                     // runt the above query
                                     $result = $conn->query($sql);
-                                    
-                                    while ($row = $result->fetch_assoc()) { 
+
+                                    while ($row = $result->fetch_assoc()) {
                                     ?>
 
                                         <tr>
@@ -116,7 +116,7 @@ include('parts/connection.php');
 
 
                                             <td>
-                                                <?php include 'models/view_assignment.php.php'; ?>
+                                                <?php include 'models/view_assignment.php'; ?>
                                             </td>
                                         </tr>
 
@@ -157,3 +157,34 @@ include('parts/connection.php');
 </body>
 
 </html>
+
+<?php
+
+if (isset($_POST['submit_assignment'])) {
+
+
+    $assignment_id = $_POST['assignment_id'];
+    $student_id = $_SESSION['id'];
+    $solution = $_FILES['solution'];
+    $submission_date = date('Y-m-d H:i:s');
+
+    $fileTmpPath = $_FILES['solution']['tmp_name'];
+    $fileName = $_FILES['solution']['name'];
+    $dest_path = 'assignment_submissions/' . $fileName;
+
+    if (move_uploaded_file($fileTmpPath, $dest_path)) {
+        $solution = $dest_path;
+    } else {
+        echo "There was an error moving the uploaded file.";
+        exit;
+    }
+
+    $sql = "INSERT INTO assignment_submission (assignment_id, student_id, solution, submission_date) 
+        VALUES ('$assignment_id', '$student_id', '$solution', '$submission_date')";
+    $state = $conn->query($sql);
+    if ($state) {
+        header("Location: assignments.php?id=" . $assignment_id);
+    }
+}
+
+?>
