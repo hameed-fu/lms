@@ -145,6 +145,7 @@ if (isset($_POST['save'])) {
                                         <input type="text" class="form-control" id="name" name="tittle">
 
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="name">Courses</label>
                                         <?php

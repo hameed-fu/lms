@@ -1,31 +1,15 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+<?php
+include 'session_check.php';
+check_user_role("admin");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 
-<?php 
+<?php
 include('parts/connection.php');
-
-// select data from categories table
-$sql = "SELECT notifications.*, courses.course_name, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName   FROM notifications
-join instructors on notifications.user_id = instructors.instructor_id
-join courses on notifications.course_id = courses.course_id
-";
-
-// runt the above query
-$result = $conn->query($sql);
-
 ?>
 
 <body>
@@ -73,8 +57,8 @@ $result = $conn->query($sql);
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -83,7 +67,7 @@ $result = $conn->query($sql);
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -102,7 +86,7 @@ $result = $conn->query($sql);
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">notifications</h4>
-                                 <table class="table table-hover table-striped">
+                                <table class="table table-hover table-striped">
                                     <tr>
                                         <th>1</th>
                                         <th>Instructor</th>
@@ -111,26 +95,36 @@ $result = $conn->query($sql);
                                         <th>Date Created</th>
                                         <th>Action</th>
                                     </tr>
-                                    <?php while($row = $result->fetch_assoc()){ ?>
+                                    <?php
+
+                                    // select data from categories table
+                                    $sql = "SELECT notifications.*, subjects.title, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName   FROM notifications
+                                    join instructors on notifications.user_id = instructors.id
+                                    join subjects on notifications.subject_id = subjects.subject_id
+                                    ";
+
+                                    // runt the above query
+                                    $result = $conn->query($sql);
+
+                                    while ($row = $result->fetch_assoc()) { ?>
 
                                         <tr>
                                             <td><?php echo  $row['notification_id'] ?></td>
                                             <td><?php echo $row['InstructorFirstName'] ?> <?php echo $row['InstructorLastName'] ?> </td>
-                                            <td><?php echo $row['course_name'] ?></td>
+                                            <td><?php echo $row['title'] ?></td>
                                             <td><?php echo $row['message'] ?></td>
                                             <td><?php echo $row['date_created'] ?></td>
-                                           <td>
-                                                <a href="edit_notifications.php?id=<?php echo $row['notification_id'] ?>"class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_notification.php?id=<?php echo $row['notification_id'] ?>"class="btn btn-danger text-white">Delete</a>
-                                                
+                                            <td>
+                                                <a href="edit_notifications.php?id=<?php echo $row['notification_id'] ?>" class="btn btn-warning text-white">Edit</a>
+                                                <a href="delete_notification.php?id=<?php echo $row['notification_id'] ?>" class="btn btn-danger text-white">Delete</a>
                                             </td>
                                         </tr>
 
                                     <?php } ?>
 
-                                    
-                                 </table>
-                                 
+
+                                </table>
+
                             </div>
                         </div>
                     </div>
@@ -155,11 +149,11 @@ $result = $conn->query($sql);
     <!--**********************************
         Main wrapper end
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
 
 </body>
 
