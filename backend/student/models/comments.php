@@ -18,11 +18,7 @@
                     <p class="text-grey"><?php echo $c_row['created_at'] ?></p>
                 <?php } ?>
             </div>
-            <form action="" method="post" class="m-4">
-                <textarea name="comments" class="form-control" id="" placeholder="Comments"></textarea>
-                <input type="hidden" name="lecture_id" value="<?php echo $row['lecture_id'] ?>">
-                <input type="submit" class="btn btn-warning my-2 mx-auto" value="Add Comment" name="add_comment">
-            </form> 
+            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-info">Save changes</button>

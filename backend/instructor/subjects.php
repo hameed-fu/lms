@@ -1,33 +1,14 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+<?php
+include 'session_check.php';
+check_user_role("instructor");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
-
-
-<?php 
-
+<?php
+include('parts/head.php');
 include('parts/connection.php');
-// select data from categories table
-$sql = "SELECT subjects.*, courses.course_name 
-from subjects
-join courses on subjects.course_id = courses.course_id
-";
-
-// runt the above query
-$result = $conn->query($sql);
-
-
-
 ?>
 
 <body>
@@ -75,8 +56,8 @@ $result = $conn->query($sql);
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -85,7 +66,7 @@ $result = $conn->query($sql);
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -95,45 +76,44 @@ $result = $conn->query($sql);
             Content body start
         ***********************************-->
         <div class="content-body">
-
             <div class="container-fluid mt-3">
-
                 <div class="row">
                     <div class="col-12">
-                        <a href="add_subject.php" class="btn btn-primary mb-1">Add New subject</a>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Subjects</h4>
-                                 <table class="table table-hover table-striped">
+                                <table class="table table-hover table-striped">
                                     <tr>
                                         <th>#</th>
                                         <th>Title</th>
                                         <th>Code</th>
-                                        <th>Course</th>
                                         <th>Description</th>
-                                        <th>Action</th>
-                                        
-                                        
-                                
-                                    <?php while($row = $result->fetch_assoc()){ ?>
+                                        <th>Actions</th>
+                                        <?php
+                                        $instructor_id = $_SESSION['id'];
+                                        $sql = "SELECT DISTINCT courses.*, lectures.instructor_id, subjects.* FROM lectures
+                                        JOIN subjects ON subjects.subject_id = lectures.subject_id
+                                        JOIN courses ON courses.course_id = subjects.course_id
+                                        WHERE lectures.instructor_id = '$instructor_id'";
+                                        $result = $conn->query($sql);
+                                        while ($row = $result->fetch_assoc()) { ?>
 
-                                        <tr>
-                                            <td><?php echo  $row['subject_id'] ?></td>
-                                            <td><?php echo $row['title'] ?></td>
-                                            <td><?php echo $row['code'] ?></td>
-                                            <td><?php echo $row['course_name'] ?></td>
-                                            <td><?php echo $row['description'] ?></td>
+                                    <tr>
+                                        <td><?php echo  $row['subject_id'] ?></td>
+                                        <td><?php echo $row['title'] ?></td>
+                                        <td><?php echo $row['code'] ?></td>
+                                        <td><?php echo $row['description'] ?></td>
 
-                                             <td>
-                                                <a href="edit_subject.php?id=<?php echo $row['subject_id'] ?>"class="btn btn-warning text-white">Edit</a>
+                                        <td>
+                                            <a href="lectures.php?subject_id=<?php echo $row['subject_id'] ?>" class="btn btn-warning text-white">Lectures</a>
 
-                                                <a onclick="return confirm('are you sure?')" href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a>
-                                                
-                                            </td>
-                                   </tr>
-                                        <?php } ?>
-                                     
-                                 </table>
+                                            <!-- <a onclick="return confirm('are you sure?')" href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a> -->
+
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -158,11 +138,11 @@ $result = $conn->query($sql);
     <!--**********************************
         Main wrapper end
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
 
 </body>
 

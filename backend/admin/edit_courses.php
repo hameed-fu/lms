@@ -134,11 +134,8 @@ if(isset($_POST['save'])){
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Category</label>
                                         <?php 
-
                                             $sql = "SELECT * FROM categories";
-                                            // runt the above query
                                             $result = $conn->query($sql);
-
                                         ?>
                                         <select name="category_id" class="form-control">
                                             <option>Please Select</option>

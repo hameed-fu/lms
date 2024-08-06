@@ -1,12 +1,8 @@
 <?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+include 'session_check.php';
+check_user_role("instructor");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +15,7 @@ include('parts/connection.php');
 
 // select data from categories table
 $sql = "SELECT lectures.*, instructors.first_name as instructorFirstName, instructors.last_name as instructorLastName, subjects.title as subjectTitle FROM lectures
-join instructors on lectures.instructor_id = instructors.instructor_id
+join instructors on lectures.instructor_id = instructors.id
 join subjects on lectures.subject_id = subjects.subject_id
 ";
 
@@ -105,21 +101,16 @@ $result = $conn->query($sql);
                                  <table class="table table-hover table-striped">
                                     <tr>
                                         <th>ID</th>
-                                        <th>Instructor</th>
                                         <th>Title</th>
-                                        <th>Subject</th>
                                         <th>Description</th>
                                         <th>Content URL</th>
                                         <th>Creation date</th>
                                         <th>Action</th>
                                     </tr>
                                     <?php while($row = $result->fetch_assoc()){ ?>
-
                                         <tr>
                                             <td><?php echo  $row['lecture_id'] ?></td>
-                                            <td><?php echo $row['instructorFirstName'] ?> <?php echo $row['instructorLastName'] ?></td>
                                             <td><?php echo $row['title'] ?></td>
-                                            <td><?php echo $row['subjectTitle'] ?></td>
                                             <td><?php echo $row['description'] ?></td>
                                             <?php 
                                             $content_URL = filter_var($row['content_URL'], FILTER_VALIDATE_URL) !== false; 
@@ -132,12 +123,11 @@ $result = $conn->query($sql);
                                             
                                             <td><?php echo $row['creation_date'] ?></td>
                                              <td>
+                                                <a href="assignments.php?assignment_id=<?php echo $row['lecture_id'] ?> " class="btn btn-secondary text-white">Assignments</a>
                                                 <a href="edit_lectures.php?id=<?php echo $row['lecture_id'] ?> " class="btn btn-warning text-white">Edit</a>
                                                 <a href="delete_lectures.php?id=<?php echo $row['lecture_id'] ?>"class="btn btn-danger text-white">Delete</a>
-                                                
                                             </td>
                                         </tr>
-
                                     <?php } ?>                                    
                                  </table>
                             </div>

@@ -1,12 +1,8 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-}
-
+include 'session_check.php';
+check_user_role("instructor");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,28 +127,27 @@ if (isset($_POST['save'])) {
                                     <div class="form-group">
                                         <label for="name">Lecturer</label>
                                         <?php
-
-                                        $sql = "SELECT * FROM instructors";
-                                        // runt the above query
-                                        $result = $conn->query($sql);
-
+                                        $id = $_SESSION['id'];
+                                        $i_sql = "SELECT * FROM instructors WHERE id = '$id'";
+                                        $i_result = $conn->query($i_sql);
+                                        $i_row = $i_result->fetch_assoc();
                                         ?>
-                                        <select name="instructor_id" class="form-control">
-                                            <option>Please Select</option>
-                                            <?php while ($row = $result->fetch_assoc()) { ?>
-                                                <option value="<?php echo $row['instructor_id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
-                                            <?php } ?>
-                                        </select>
+                                        <input disabled  type="text" class="form-control" id="name" name="" value="<?php echo $i_row['first_name'] ?> <?php echo $i_row['last_name'] ?>">
+                                        <input type="hidden" name="instructor_id" value="<?php echo $i_row['id'] ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Title</label>
                                         <input type="text" class="form-control" id="name" name="tittle">
 
                                     </div>
+
                                     <div class="form-group">
                                         <label for="name">Courses</label>
                                         <?php
-                                        $sql = "SELECT * FROM courses";
+                                        $sql = "SELECT DISTINCT courses.*, lectures.instructor_id, subjects.* FROM lectures
+                                        JOIN subjects ON subjects.subject_id = lectures.subject_id
+                                        JOIN courses ON courses.course_id = subjects.course_id
+                                        WHERE lectures.instructor_id = '$id'";
                                         $result = $conn->query($sql);
                                         ?>
                                         <select name="" id="course" onchange="getSubjects()" class="form-control">
@@ -161,7 +156,6 @@ if (isset($_POST['save'])) {
                                                 <option value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
                                             <?php } ?>
                                         </select>
-
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Subjects</label>
@@ -179,7 +173,7 @@ if (isset($_POST['save'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="name"> Content URL</label>
-                                        <input type="text" class="form-control" id="urlInput" name="content_URL">
+                                        <input type="url" class="form-control" id="urlInput" name="content_URL">
                                         <input type="file" class="form-control" id="fileInput" name="content_URL" style="display:none">
                                     </div>
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>

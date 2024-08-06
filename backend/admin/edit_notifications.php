@@ -10,7 +10,7 @@ include ('parts/connection.php');
 if(isset($_GET['id'])){
     $id = $_GET['id'];
      
-    $sql = "select * from notifications where notification_id =  $id";
+    $sql = "SELECT * from notifications where notification_id =  $id";
     $result = $conn->query($sql);
     $notification = $result->fetch_assoc();
 
@@ -124,7 +124,7 @@ if(isset($_POST['save'])){
                                     <select name="user_id" class="form-control">
                                       <option>Please Select</option>
                                      <?php while($instructor = $result->fetch_assoc()){ ?>
-       <option <?php echo $instructor['instructor_id'] == $notification['user_id'] ? 'selected' : '' ?> value="<?php echo $instructor['instructor_id'] ?>"><?php echo $instructor['first_name'] ?> <?php echo $instructor['last_name'] ?></option>
+       <option <?php echo $instructor['id'] == $notification['user_id'] ? 'selected' : '' ?> value="<?php echo $instructor['instructor_id'] ?>"><?php echo $instructor['first_name'] ?> <?php echo $instructor['last_name'] ?></option>
                                    <?php } ?>
                                          </select>
                                          
@@ -135,14 +135,13 @@ if(isset($_POST['save'])){
                                         
                                         <?php 
                                             $sql = "SELECT * FROM courses";
-                                            // runt the above query
                                             $result = $conn->query($sql);
 
                                         ?>
                                         <select name="course_id" class="form-control">
                                             <option>Please Select</option>
-                                            <?php while($course = $result->fetch_assoc()){ ?>
-                                                <option <?php echo $course['course_id'] == $notification['course_id'] ? 'selected' : '' ?> value="<?php echo $course['course_id'] ?>"><?php echo $course['course_name'] ?></option>
+                                            <?php while($row = $result->fetch_assoc()){ ?>
+                                                <option  <?php echo $row['course_id'] == $notification['notification_id'] ? 'selected' : '' ?> value="<?php echo $row['course_id'] ?>"><?php echo $row['course_name'] ?></option>
                                             <?php } ?>
                                         </select>
                                          

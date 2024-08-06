@@ -2,12 +2,6 @@
 include 'parts/connection.php';
 include 'session_check.php';
 check_user_role("student");
-$id = $_SESSION['id'];
-$sql = "SELECT * FROM enrollments WHERE student_id = '$id'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    header("Location: index.php");
-}
 ?>
 
 
@@ -76,9 +70,9 @@ if ($result->num_rows > 0) {
             <div class="container-fluid mt-3">
                 <div class="row">
                     <?php
-                    $sql = "select * from courses";
-                    $result = $conn->query($sql);
-                    while ($row = $result->fetch_assoc()) {
+                    $c_sql = "select * from courses";
+                    $c_result = $conn->query($c_sql);
+                    while ($row = $c_result->fetch_assoc()) {
                     ?>
                         <div class="col-lg-3 col-sm-6">
                             <div class="card gradient-<?php echo rand(1, 3) ?>">
@@ -89,13 +83,21 @@ if ($result->num_rows > 0) {
                                         <p class="text-white mb-0"><?php echo $row['start_date'] . " - " . $row['end_date'] ?></p>
                                     </div>
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-book"></i></span>
-
                                 </div>
-                                <form action="" method="post">
-                                    <input type="hidden" name="student_id" value="<?php echo $_SESSION['id'] ?>">
-                                    <input type="hidden" name="course_id" value="<?php echo $row['course_id'] ?>">
-                                    <button style="width: 100%;" type="submit" name="submit" class="btn btn-secondary">Enroll</button>
-                                </form>
+                                <?php
+                                $id = $_SESSION['id'];
+                                $e_course_id = $row['course_id'];
+                                $e_sql = "SELECT * FROM enrollments WHERE student_id = '$id' AND course_id = '$e_course_id'";
+                                $e_result = $conn->query($e_sql);
+                                if ($e_result->num_rows > 0) {
+                                } else {
+                                ?>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['id'] ?>">
+                                        <input type="hidden" name="course_id" value="<?php echo $row['course_id'] ?>">
+                                        <button style="width: 100%;" type="submit" name="submit" class="btn btn-secondary">Enroll</button>
+                                    </form>
+                                <?php } ?>
                             </div>
                         </div>
                     <?php } ?>
@@ -129,7 +131,6 @@ if ($result->num_rows > 0) {
 
 </html>
 
-
 <?php
 if (isset($_POST['submit'])) {
     $student_id = $_POST['student_id'];
@@ -138,10 +139,12 @@ if (isset($_POST['submit'])) {
 
     $sql = "INSERT INTO enrollments (student_id, course_id, enrollment_date) 
     VALUES ('$student_id', '$course_id', '$enrollment_date')";
-    $state = $conn->query($sql);
-    if ($state) {
-        echo '<script>window.location.href = window.location.href;</script>';
+
+    if ($conn->query($sql) === TRUE) {
+        echo '<script>window.location.replace("index.php");</script>';
+        exit;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
-
 ?>
