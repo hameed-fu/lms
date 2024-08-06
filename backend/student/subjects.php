@@ -91,11 +91,10 @@ include('parts/connection.php');
                                         <th>Description</th>
                                         <th>Actions</th>
                                         <?php
-                                        $course_id = $_SESSION['course_id'];
+                                        $course_id = $_GET['id'];
                                         $sql = "SELECT *
                                         from subjects
                                         WHERE course_id = '$course_id'";
-
                                         $result = $conn->query($sql);
                                         while ($row = $result->fetch_assoc()) { ?>
 
@@ -106,7 +105,7 @@ include('parts/connection.php');
                                         <td><?php echo $row['description'] ?></td>
 
                                         <td>
-                                            <a href="lectures.php?id=<?php echo $row['subject_id'] ?>" class="btn btn-warning text-white">Lectures</a>
+                                            <a href="lectures.php?subject_id=<?php echo $row['subject_id'] ?>" class="btn btn-warning text-white">Lectures</a>
 
                                             <!-- <a onclick="return confirm('are you sure?')" href="delete_subject.php?id=<?php echo  $row['subject_id'] ?>" class="btn btn-danger text-white">Delete</a> -->
 

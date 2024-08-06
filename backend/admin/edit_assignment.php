@@ -122,7 +122,7 @@ if (isset($_POST['save'])) {
                                         <select name="instructor_id" class="form-control">
                                             <option>Please Select</option>
                                             <?php while ($row = $result->fetch_assoc()) { ?>
-                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
+                                                <option <?php echo $assignment['instructor_id'] == $row['id'] ? 'selected' : '' ?> value="<?php echo $row['id'] ?>"><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -135,8 +135,8 @@ if (isset($_POST['save'])) {
                                         <select name="" id="subject" onchange="getLectures()" class="form-control">
                                             <option>Please Select</option>
                                             <?php while ($row = $result->fetch_assoc()) { ?>
-                                                <option value="<?php echo $row['subject_id'] ?>"><?php echo $row['title'] ?></option>
-                                            <?php } ?>
+                                                <option <?php echo $assignment['subject'] == $row['id'] ? 'selected' : '' ?>  value="<?php  echo $row['subject_id'] ?>"><?php echo $row['title'] ?></option>
+                                            <?php } ?>  
                                         </select>
                                     </div>
                                     <div class="form-group">

@@ -1,30 +1,19 @@
-<?php 
-
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-    header('Location: login.php');
-}
-
+<?php
+include 'session_check.php';
+check_user_role("instructor");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include ('parts/head.php') ?>
+<?php include('parts/head.php') ?>
 
 
 <?php
-include ('parts/connection.php');
+include('parts/connection.php');
 
-// select data from categories table
-$sql = "SELECT assignments.*, instructors.first_name as InstructorFirstName,instructors.last_name as InstructorLastName, lectures.title as LectureTitle FROM assignments
-join instructors on instructors.instructor_id = assignments.instructor_id
-join lectures on lectures.lecture_id = assignments.lecture_id
-";
 
-// runt the above query
-$result = $conn->query($sql);
 
 ?>
 
@@ -73,8 +62,8 @@ $result = $conn->query($sql);
         ***********************************-->
         <?php
 
-        include ('parts/header.php')
-            ?>
+        include('parts/header.php')
+        ?>
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -83,7 +72,7 @@ $result = $conn->query($sql);
             Sidebar start
         ***********************************-->
         <?php
-        include ('parts/sidebar.php');
+        include('parts/sidebar.php');
         ?>
         <!--**********************************
             Sidebar end
@@ -112,7 +101,13 @@ $result = $conn->query($sql);
                                         <th>Assignments</th>
                                         <th>Action</th>
                                     </tr>
-                                    <?php while ($row = $result->fetch_assoc()) { ?>
+                                    <?php
+                                    $assignment_id = $_GET['assignment_id'];
+                                    $sql = "SELECT assignment_submission.*, students.first_name, students.last_name FROM assignment_submission 
+                                    JOIN students ON students.id = assignment_submission.student_id
+                                    WHERE assignment_id = '$assignment_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) { ?>
 
                                         <tr>
                                             <td><?php echo $row['InstructorFirstName'] ?>
@@ -124,13 +119,12 @@ $result = $conn->query($sql);
 
 
                                             <td>
-                                                <a class="btn btn-primary text-white">View</a>
+                                                <?php include 'models/view_assignment.php.php'; ?>
                                             </td>
 
                                             <td>
-                                                <a href="edit_assignment.php?id=<?php echo $row['assignment_id'] ?>"   class="btn btn-warning text-white">Edit</a>
-                                                <a href="delete_assignment.php?id=<?php echo $row['assignment_id'] ?>"
-                                                    class="btn btn-danger text-white">Delete</a>
+                                                <!-- <a href="edit_assignment.php?id=<?php echo $row['assignment_id'] ?>" class="btn btn-warning text-white">Edit</a> -->
+                                                <a href="delete_assignment.php?id=<?php echo $row['assignment_id'] ?>" class="btn btn-danger text-white">Delete</a>
 
                                             </td>
                                         </tr>
@@ -163,11 +157,11 @@ $result = $conn->query($sql);
     <!--**********************************
         Main wrapper end
     ***********************************-->
-    <?php include ('parts/footer.php') ?>
+    <?php include('parts/footer.php') ?>
     <!--**********************************
         Scripts
     ***********************************-->
-    <?php include ('parts/script.php') ?>
+    <?php include('parts/script.php') ?>
 
 </body>
 

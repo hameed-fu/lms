@@ -146,12 +146,7 @@ if (isset($_POST['save'])) {
                                     <div class="form-group">
                                         <label for="name">Message</label>
                                         <textarea type="text" class="form-control" id="name" name="message"></textarea>
-
                                     </div>
-
-
-
-
                                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>

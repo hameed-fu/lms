@@ -125,7 +125,7 @@ include('parts/connection.php');
                                             </td>
 
                                             <td>
-                                                <a href="edit_assignment.php?id=<?php echo $row['assignment_id'] ?>" class="btn btn-warning text-white">Edit</a>
+                                                <a href="assignments_submission.php?assignment_id=<?php echo $row['assignment_id'] ?>" class="btn btn-warning text-white">Assignment Submissions</a>
                                                 <a href="delete_assignment.php?id=<?php echo $row['assignment_id'] ?>" class="btn btn-danger text-white">Delete</a>
 
                                             </td>
